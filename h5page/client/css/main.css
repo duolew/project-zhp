@@ -1,0 +1,79 @@
+*{
+    margin:0 auto;
+    padding:0;
+}
+body,html{
+    height:100%;
+}
+.wrap{
+    background:#000;
+    height: 100%;
+    overflow:hidden;
+}
+/*如果要是让整体移动，则移动content这个框，而不是分别挪动slide1，2，3，4*/
+.content{
+    position:relative;
+}
+.fixed-more{
+    position:fixed;
+    bottom:0;
+    width:100%;
+}
+.fixed-more img{
+    left:0;
+    right:0;
+
+    position:absolute;
+    animation:upmore .8s ease;              /*播放方式*/
+    /*animation-direction: alternate;       到终点后向反向运动*/
+    animation-iteration-count: infinite;    /*循环次数-无限*/
+    -webkit-animation-play-state: running;  /*播放状态-自动播放*/
+    -moz-animation-play-state: running;
+    -o-animation-play-state: running;
+    animation-play-state: running;
+}
+@keyframes upmore{
+    0%{
+        bottom:-15px;
+        opacity:0;
+    }
+    100%{
+        bottom:15px;
+        opacity:1;
+    }
+}
+.slide{
+    overflow:hidden;
+    position:relative;
+    /*transform:scale(0.625);*/
+    background: url(../image/bg.jpg)repeat;
+}
+
+.up1{
+    transform:translate3d(0,-100%,0);
+    transition:transform 1s ease;
+}
+.up2{
+    transform:translate3d(0,-200%,0);
+    transition:transform 1s ease;
+}
+.up3{
+    transform:translate3d(0,-300%,0);
+    transition:transform 1s ease;
+}
+.down1{
+    transform:translate3d(0,100%,0);
+    transition:transform 1s ease;
+    display: none;
+}
+.down2{
+    transform:translate3d(0,200%,0);
+    transition:transform 1s ease;
+    display: none;
+}
+.down3{
+    transform:translate3d(0,300%,0);
+    transition:transform 1s ease;
+    display: none;
+}
+

@@ -1,0 +1,25 @@
+{
+  "name": "zhp-bower",
+  "version": "0.0.1",
+  "homepage": "https://github.com/duolew/YNET",
+  "authors": [
+    "duolew <445138773@qq.com>"
+  ],
+  "description": "first version",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-router": "ui-router#~0.2.15",
+    "jquery": "~2.1.4"
+  },
+  "devDependencies": {
+    "seajs": "~3.0.0",
+    "requirejs": "~2.1.20"
+  }
+}
