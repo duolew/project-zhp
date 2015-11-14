@@ -10,7 +10,7 @@ body,html{
     height: 100%;
     overflow:hidden;
 }
-/*Èç¹ûÒªÊÇÈÃÕûÌåÒÆ¶¯£¬ÔòÒÆ¶¯contentÕâ¸ö¿ò£¬¶ø²»ÊÇ·Ö±ğÅ²¶¯slide1£¬2£¬3£¬4*/
+/*å¦‚æœè¦æ˜¯è®©æ•´ä½“ç§»åŠ¨ï¼Œåˆ™ç§»åŠ¨contentè¿™ä¸ªæ¡†ï¼Œè€Œä¸æ˜¯åˆ†åˆ«æŒªåŠ¨slide1ï¼Œ2ï¼Œ3ï¼Œ4*/
 .content{
     position:relative;
 }
@@ -24,10 +24,10 @@ body,html{
     right:0;
 
     position:absolute;
-    animation:upmore .8s ease;              /*²¥·Å·½Ê½*/
-    /*animation-direction: alternate;       µ½ÖÕµãºóÏò·´ÏòÔË¶¯*/
-    animation-iteration-count: infinite;    /*Ñ­»·´ÎÊı-ÎŞÏŞ*/
-    -webkit-animation-play-state: running;  /*²¥·Å×´Ì¬-×Ô¶¯²¥·Å*/
+    animation:upmore .8s ease;              /*æ’­æ”¾æ–¹å¼*/
+    /*animation-direction: alternate;       åˆ°ç»ˆç‚¹åå‘åå‘è¿åŠ¨*/
+    animation-iteration-count: infinite;    /*å¾ªç¯æ¬¡æ•°-æ— é™*/
+    -webkit-animation-play-state: running;  /*æ’­æ”¾çŠ¶æ€-è‡ªåŠ¨æ’­æ”¾*/
     -moz-animation-play-state: running;
     -o-animation-play-state: running;
     animation-play-state: running;
@@ -49,6 +49,10 @@ body,html{
     background: url(../image/bg.jpg)repeat;
 }
 
+.up0{
+    transform:translate3d(0,0%,0);
+    transition:transform 1s ease;
+}
 .up1{
     transform:translate3d(0,-100%,0);
     transition:transform 1s ease;
@@ -61,19 +65,5 @@ body,html{
     transform:translate3d(0,-300%,0);
     transition:transform 1s ease;
 }
-.down1{
-    transform:translate3d(0,100%,0);
-    transition:transform 1s ease;
-    display: none;
-}
-.down2{
-    transform:translate3d(0,200%,0);
-    transition:transform 1s ease;
-    display: none;
-}
-.down3{
-    transform:translate3d(0,300%,0);
-    transition:transform 1s ease;
-    display: none;
-}
+
 
