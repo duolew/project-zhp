@@ -9,37 +9,37 @@ var gulp = require('gulp'),
 // jshint
 gulp.task('Lint', function () {
   gulp.src('client/static/js/*.js')
- .pipe(jshint())                                 //¼ìÑéjs
- .pipe(jshint.reporter()); // Êä³ö¼ì²é½á¹û
+ .pipe(jshint())                                 //ï¿½ï¿½ï¿½ï¿½js
+ .pipe(jshint.reporter()); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  });
 
 gulp.task('less-css',function(){
     gulp.src('client/static/css/*.less')
-        .pipe(less())                            //ÏÈ½«less×ª»»³Écss
+        .pipe(less())                            //ï¿½È½ï¿½less×ªï¿½ï¿½ï¿½ï¿½css
         .pipe(gulp.dest('client/static/css/'));
 });
 gulp.task('all-html',function(){
     gulp.src('client/page/*.html')
-        .pipe(md5(10))                          //¸øhtmlÌí¼Ómd5´Á
+        .pipe(md5(10))                          //ï¿½ï¿½htmlï¿½ï¿½ï¿½md5ï¿½ï¿½
         .pipe(gulp.dest('dist/page'))
 });
 gulp.task('all-css',function(){
-    gulp.src('client/static/css/*.css')         //ÒıÈëÎÄ¼ş¼Ğ
-        .pipe(concat('main.css'))               //½«ËùÓĞÒıÈëµÄcss´ò°üµ½main.css,ÒòÎªÒıÈëmd5´Á£¬ËùÒÔÕâÀï´ò°üÃûÒ»¶¨ÒªÊÇhtmlÖĞÒıÈë¹ıµÄ£¬·ñÔòµÄ»°ÕÒ²»µ½£¬ĞŞ¸Ä²»ÁËhtmlÄÚÒıÈë
-        .pipe(minifyCss())                      //Ñ¹ËõCSS
-        .pipe(md5(10,'client/page/*.html'))     //MD5µÄ³¤¶ÈÎª10£¬²¢ÇÒ×Ô¶¯ĞŞ¸ÄÒıÈëÔö¼Ómd5ÎÄ¼şµÄÒıÈëµØÖ·£¡£¡
-        .pipe(gulp.dest('dist/css'))            //ÊäÈëÎÄ¼ş¼Ğ
+    gulp.src('client/static/css/*.css')         //ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
+        .pipe(concat('main.css'))               //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½cssï¿½ï¿½ï¿½ï¿½ï¿½main.css,ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½md5ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Òªï¿½ï¿½htmlï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ş¸Ä²ï¿½ï¿½ï¿½htmlï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        .pipe(minifyCss())                      //Ñ¹ï¿½ï¿½CSS
+        .pipe(md5(10,'client/page/*.html'))     //MD5ï¿½Ä³ï¿½ï¿½ï¿½Îª10ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½md5ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½
+        .pipe(gulp.dest('dist/css'))            //ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
 });
 gulp.task('all-js',function(){
     gulp.src('client/static/js/*.js')
-        .pipe(concat('main.js'))
-        .pipe(uglify())                         //Ñ¹Ëõjs
+        .pipe(concat('index.js'))
+        .pipe(uglify())                         //Ñ¹ï¿½ï¿½js
         .pipe(md5(10,'client/page/*.html'))
         .pipe(gulp.dest('dist/js'))
 });
 //default
 gulp.task('default', ['Lint','all-html','less-css','all-css','all-js'], function() {
-  gulp.start();                                 //Õâ¸öÀï±ßÒ²¿ÉÒÔ·ÅÈëtaskÈÎÎñÃû£¬µ«ÊÇÕâÀï±ßÊÇÃ»ÓĞË³ĞòµÄ
+  gulp.start();                                 //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½Ô·ï¿½ï¿½ï¿½taskï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ë³ï¿½ï¿½ï¿½
 });
 gulp.watch('client/static/css/*.less',['default']);
-                                                //¼àÌıÕâ¸öÄ¿Â¼ÏÂµÄlessÎÄ¼ş£¬µ±±ä»¯Ê±£¬Ö´ĞĞdefaultÈÎÎñ£¡
+                                                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿Â¼ï¿½Âµï¿½lessï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ä»¯Ê±ï¿½ï¿½Ö´ï¿½ï¿½defaultï¿½ï¿½ï¿½ï¿½

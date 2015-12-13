@@ -14,8 +14,17 @@
   "author": "fis@baidu.com",
   "license": "BSD",
   "dependencies": {
-    "lodash": "2.4.1",
+    "angular": "^1.4.8",
+    "body-parser": "^1.14.1",
+    "bootstrap": "^4.0.0-alpha.2",
+    "cookie-parser": "^1.4.0",
     "debuglog": "1.0.1",
+    "express": "^4.13.3",
+    "jade": "^1.11.0",
+    "jquery": "^2.1.4",
+    "lodash": "2.4.1",
+    "mongoose": "^4.3.0",
+    "multer": "^1.1.0",
     "yog2-kernel": "0.3.6"
   },
   "devDependencies": {
