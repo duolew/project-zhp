@@ -3,7 +3,7 @@
  * @author
  */
 
-fis.config.set('namespace', 'ng-booklist');
+fis.config.set('namespace', 'webpack-demo');
 
 // chrome下可以安装插件实现livereload功能
 // https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei

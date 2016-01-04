@@ -3,7 +3,7 @@
  */
 
 require.config({
-    paths:{                           //有s不要拼错
+    paths:{                           //鏈塻涓嶈鎷奸敊
         'angular':'../lib/angular',
         'uiRouter':['http://apps.bdimg.com/libs/angular-ui-router/0.2.15/angular-ui-router','../../../../bower_components/angular-ui-router/release/angular-ui-router'],
     },
@@ -12,10 +12,10 @@ require.config({
             exports:'angular'
         },
         'uiRouter':{
-            deps:['angular'],       //依赖于angular
+            deps:['angular'],       //渚濊禆浜巃ngular
             exports:'uiRouter'
         }
-        //上边这三行可以简写为
+        //涓婅竟杩欎笁琛屽彲浠ョ畝鍐欎负
         //'uiRouter':['angular']
 
     }

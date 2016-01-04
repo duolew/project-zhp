@@ -12,14 +12,14 @@ module.exports = function(router){
 
     // a restful api example
     router.route('/book')
-        // PUT /ng-booklist/book
+        // PUT /adsf/book
         .put(router.action('book').put)
-        // GET /ng-booklist/book
+        // GET /adsf/book
         .get(router.action('book'));
 
     router.route('/book/:id')
-        // GET /ng-booklist/book/1
+        // GET /adsf/book/1
         .get(router.action('book').get)
-        // DELETE /ng-booklist/book/1
+        // DELETE /adsf/book/1
         .delete(router.action('book').delete);
 };
