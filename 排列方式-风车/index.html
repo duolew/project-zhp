@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<script>
+    window.onload=function(){
+        var liston=document.getElementById("btn1");
+        var caroff=document.getElementById("btn2");
+       // var listoff=document.getElementsByClassName("list_off");
+        //var caron=document.getElementsByClassName("car_on");
+        var imga=document.getElementsByTagName("img");//一定要注意这里取值
+        //获取到的是一个数组，所以下边要循环
+        //var imgb=document.getElementsByClassName("img_b");
+        liston.onclick=function(){
+            caroff.className="car_on";
+            liston.className="list_off";
+            for(i=0;i<imga.length;i++){
+                imga[i].setAttribute("src","images/small.jpg")
+                //imga[i].src = "./images/small.jpg"
+                imga[i].parentNode.className="img_b";
+
+            }
+
+
+        }
+    }
+</script>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        font: 14px "Microsoft Yahei", "微软雅黑";
+    }
+    ul,ol{
+        list-style: none;
+    }
+    a{
+        text-decoration: none;
+    }
+    .content{
+        margin: auto;
+        width: 515px;
+        border: 1px solid red;
+    }
+    .top{
+        width: 100%;
+        height: 26px;
+        border: 1px solid red;
+    }
+    .top a{
+        width: 16px;
+        height: 16px;
+        float: right;
+        margin: 5px 5px;
+    }
+    .list_off{
+
+        background: url("images/btns.jpg") no-repeat -38px 0px;
+    }
+    .list_on{
+
+            background: url("images/btns.jpg") no-repeat -21px 0px;
+        }
+
+    .car_on{
+        background: url("images/btns.jpg") no-repeat -21px -34px;
+    }
+    .car_off{
+        background: url("images/btns.jpg") no-repeat -38px -32px;
+    }
+    a,span,.bottom{
+        display: block;
+        line-height: 23px;
+        margin-left: 0px;
+    }
+    .list{
+        overflow: hidden;
+    }
+    ul li{
+        width: 164px;
+        float: left;
+        margin-left: 6px;
+    }
+    .img_a{
+        width: 164px;
+        height: 164px;
+        overflow: hidden;
+    }
+    .img_b{                        /*特别特别注意这里的设置*/
+        width: 50px;
+        height: 50px;
+        float: left;
+    }
+</style>
+<body>
+<div class="content">
+    <div class="top">
+        <a href="#" id="btn1" class="list_on"></a>
+        <a href="#" id="btn2"class="car_off"></a>
+    </div>
+    <div class="list">
+        <ul>
+            <li>
+                <a href="" class="img_a"><img src="images/big.jpg" alt="" /></a>
+                <a href="">白羊</a>
+                <span>辽宁</span>
+                <span>21个共同好友</span>
+                <div class="bottom">未分组好友</div>
+            </li>
+            <li>
+                <a href="" class="img_a"><img src="images/big.jpg" alt="" /></a>
+                <a href="">白羊</a>
+                <span>辽宁</span>
+                <span>21个共同好友</span>
+                <div class="bottom">未分组好友</div>
+            </li>
+            <li>
+                <a href="" class="img_a"><img src="images/big.jpg" alt="" /></a>
+                <a href="">白羊</a>
+                <span>辽宁</span>
+                <span>21个共同好友</span>
+                <div class="bottom">未分组好友</div>
+            </li>
+            <li>
+                <a href="" class="img_a"><img src="images/big.jpg" alt="" /></a>
+                <a href="">白羊</a>
+                <span>辽宁</span>
+                <span>21个共同好友</span>
+                <div class="bottom">未分组好友</div>
+            </li>
+            <li>
+                <a href="" class="img_a"><img src="images/big.jpg" alt="" /></a>
+                <a href="">白羊</a>
+                <span>辽宁</span>
+                <span>21个共同好友</span>
+                <div class="bottom">未分组好友</div>
+            </li>
+            <!--<li>
+                <a href="" class="img_b"><img src="images/small.jpg" alt="" /></a>
+                <a href="">白羊</a>
+                <span>辽宁</span>
+                <span>21个共同好友</span>
+                <div class="bottom">未分组好友</div>
+            </li>-->
+        </ul>
+    </div>
+</div>
+</body>
+</html>

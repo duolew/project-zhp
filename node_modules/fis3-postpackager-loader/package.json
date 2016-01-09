@@ -1,0 +1,57 @@
+{
+  "name": "fis3-postpackager-loader",
+  "version": "1.3.2",
+  "description": "resouce loader",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fex-team/fis3-postpackager-loader.git"
+  },
+  "keywords": [
+    "fis3",
+    "loader"
+  ],
+  "author": {
+    "name": "fis"
+  },
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/fex-team/fis3-postpackager-loader/issues"
+  },
+  "homepage": "https://github.com/fex-team/fis3-postpackager-loader",
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "fis3": "^3.0.17",
+    "mocha": "^2.2.5"
+  },
+  "gitHead": "00965fa6a36412f8c05788c4df597bc1830bcd31",
+  "_id": "fis3-postpackager-loader@1.3.2",
+  "_shasum": "72800bf3032180c3e06b0623bd6f3c4edb00a3bf",
+  "_from": "fis3-postpackager-loader@*",
+  "_npmVersion": "2.7.5",
+  "_nodeVersion": "0.12.2",
+  "_npmUser": {
+    "name": "2betop",
+    "email": "2betop.cn@gmail.com"
+  },
+  "dist": {
+    "shasum": "72800bf3032180c3e06b0623bd6f3c4edb00a3bf",
+    "tarball": "http://registry.npmjs.org/fis3-postpackager-loader/-/fis3-postpackager-loader-1.3.2.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "2betop",
+      "email": "2betop.cn@gmail.com"
+    },
+    {
+      "name": "fis-dev",
+      "email": "fansekey@gmail.com"
+    }
+  ],
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/fis3-postpackager-loader/-/fis3-postpackager-loader-1.3.2.tgz",
+  "readme": "ERROR: No README data found!"
+}

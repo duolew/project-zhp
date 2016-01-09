@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript" >
+        (function(){    function Parent(){     //封装1：添加（function(){
+            this.name="haha";
+            this.yanse=4;
+        }
+            Parent.prototype.sound=function (){
+            return this.name;
+        };
+            window.Parent=Parent;              //这句话是将封装打开，让外部可以调用内部信息
+        }());                                     //封装2；添加}（））；     1和2同时存在进行封装！！
+        (function(){ function go(){
+            var bh = new Parent();    //让go里包含Parent
+                this.ni = "zheqge";
+            }
+//        var u=go.prototype.z
+            go.prototype.z = function (){
+/*         u.call(this)
+            如果这个Z和上边sound都用一个单词的时候例如用z，想调用父类z时候，
+            要在function go()这个函数下边添加var u=go.prototype.z;
+            并且在go.prototype.z的function内首先添加u.call(this);*/
+            return this.ni;
+            };
+            window.go=go;
+        }());                        //同样是封装的结尾，（）的意思是让封装执行
+        var x=new Parent();
+        alert(x.sound());
+        var y=new go();
+        alert(y.z());
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular.min.js"></script>
+    <title></title>
+</head>
+<body>
+
+    <!--directive基础-->
+
+<!--    <div ng-app="app1">
+        <hello></hello>                         &lt;!&ndash;当restrict为E的时候这么写&ndash;&gt;
+        <div hello></div>                       &lt;!&ndash;A的写法&ndash;&gt;
+        <div class="hello"></div>               &lt;!&ndash;C的写法&ndash;&gt;
+    </div>
+
+<script>
+    var app = angular.module("app1",[]);
+    app.directive('hello',function(){
+        return{
+            restrict:'E',    //E:element     A：属性（默认），调用的时候直接加在div后就行<div hello>        C:class的意思，调用class="hello"
+            replace:true,    //默认为false，当为false的时候显示<hello>标签，为true的时候隐藏<hello>标签
+            template:'<div>HELLO Angular<div ng-transclude></div>',    //这个其实可以放到一个独立的文件中，形式改成templateUrl：'hello.html'
+                                        //ng-translude是保留hello内的元素，不让这个template里边的元素替换
+            compile：function(){         //这个是自定义的属性，一般不用，用的话还要写一遍compile因为用的时候会覆盖掉之前默认的
+            }
+            link:function(){
+                alert("我在这里")
+            }
+        }
+    })
+</script>-->
+
+
+
+    <!--directive(指令)与controller（控制器）之间的回话
+    directive(指令)---放一些鼠标的事件及dom操作
+    controller（控制器）---依赖注入
+    run为注射器，只执行一次
+
+
+    directive和内部的controller和link怎么用
+    controller：想将方法暴露出去的话用
+    link：绑定内部事务
+
+
+    -->
+
+
+    <div ng-app="app" ng-controller="AppCtrl">
+        <span enter="loadMoreData()">加载</span>                       <!--A的写法-->
+        <span enter="DelData()">删除</span>                       <!--A的写法-->
+    </div>
+    <script>
+        var app = angular.module("app",[]);
+        app.controller('AppCtrl',function($scope){
+            $scope.loadMoreData=function(){
+                alert("正在加载。。。")
+            };
+            $scope.DelData=function(){
+                alert("正在删除数据。。。")
+            }
+        });
+        app.directive('enter',function(){
+            return{               //如果只有link的时候可以直接return一个函数--return function(scope,element,attrs){}
+                restrict:'A',    //E:element     A：属性(默认)，调用的时候直接加在div后就行<div hello>        C:class的意思，调用class="hello"
+                link:function(scope,element,attrs){
+                    element.bind('mouseenter',function(){
+                        //其实还省略了一个attr.howtoload（），如果定义了这个，那上边应该是howtoload="loadMoreData()"而不是enter了，下边那句attrs。enter其实就是这句话，这里有一个坑，就是这里必须是小写
+                        scope.$apply(attrs.enter);   //这里的演变过程是第一次是scope.loadMoreData（）
+                });                                 //第二次是改成了scope.$apply(loadMoreData())
+}                                                   //第三次是改成了scope.$apply(attrs.enter)
+            }
+        })
+    </script>
+
+
+
+
+</body>
+</html>

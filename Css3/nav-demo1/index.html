@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+    <style>
+        body,ul,li{
+            margin: 0;
+            padding: 0;
+            font:12px "微软雅黑";
+        }
+        .nav{
+            display: block;
+            margin: 200px auto;
+            padding: 0;
+            width: 950px;
+            /*border:1px solid #FF6600;*/
+            height: 100px;
+        }
+        .nav ul{
+            margin: 0 auto;
+            padding: 0;
+            /*border: 1px solid #009900;*/
+            height: 80px;
+        }
+        .nav>ul>li,.nav>ul>li>ul>li{
+
+            float: left;
+            display: block;
+            width: 120px;
+            height: 20px;
+            background-color: #0088bb;
+            padding: 5px;
+            margin: 1px;
+            list-style-type: none;
+            text-align: center;
+        }
+        .nav>ul>li:hover,.nav>ul>li>ul>li:hover{
+            background-image: linear-gradient(45deg,#000,transparent);
+        }
+        .nav>ul>li>a{
+            display: block;
+            text-decoration: none;
+            color:#ffffff;
+        }
+        .nav>ul>li>ul{
+            display: none;
+        }
+        .nav>ul>li:hover ul{          /*上边和这两句非常关键，hover的位置，*/
+            display: block;
+        }
+    </style>
+<body>
+<div class="nav">
+    <ul>
+        <li><a href="#"><span>1</span></a></li>
+        <li><a href="#"><span>2</span></a></li>
+        <li><a href="#"><span>3</span></a></li>
+        <li><a href="#"><span>4</span></a></li>
+        <li><a href="#"><span>5</span></a></li>
+        <li><a href="#"><span>6</span></a>
+            <ul>
+                <li><a href="#"><span>8</span></a></li>
+                <li><a href="#"><span>9</span></a></li>
+                <li><a href="#"><span>10</span></a></li>
+                <!--<li><a href="#"><span>11</span></a></li>-->
+            </ul>
+        </li>
+        <li><a href="#"><span>7</span></a></li>
+    </ul>
+</div>
+</body>
+</html>

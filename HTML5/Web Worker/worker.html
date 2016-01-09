@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--
+
+不用web worker 时候在 HTML 页面中执行脚本时，页面的状态是不可响应的，直到脚本已完成。
+
+web worker 是运行在后台的 JavaScript，独立于其他脚本，不会影响页面的性能。您可以继续做任何愿意做的事情：点击、选取内容等等，而此时 web worker 在后台运行。
+
+-->
+
+<p>计数： <output id="result"></output></p>
+<button onclick="startWorker()">开始工作</button>
+<button onclick="stopWorker()">停止工作</button>
+<br><br>
+
+<script>
+    var w;
+
+    function startWorker()
+    {
+        if(typeof(Worker)!=="undefined")              //这句话是检查浏览器是否支持web worker
+        {
+            if(typeof(w)=="undefined")                 //创建一个web worker对象
+            {
+                w=new Worker("demo_workers.js");
+            }
+            w.onmessage = function (event) {            //通过onmessage来监听这个事件
+                document.getElementById("result").innerHTML=event.data;
+            };
+        }
+        else
+        {
+            document.getElementById("result").innerHTML="抱歉，你的浏览器不支持 Web Workers...";
+        }
+    }
+
+    function stopWorker()
+    {
+        w.terminate();                                    //停止web worker用terminate（）；
+    }
+</script>
+
+
+
+
+
+
+
+</body>
+</html>

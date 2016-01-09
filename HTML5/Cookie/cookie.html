@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<!--取出cookie-->
+<script>
+    function getCookie(c_name){
+        if(document.cookie.length>0){
+            c_start=document.cookie.indexOf(c_name+"="); //这个c_start是c_name的key的起始位置
+            if(c_start!=-1){
+                c_start=c_start+c_name.length+1; //这个c_start是c_name的值的起始位置
+                c_end=document.cookie.indexOf(";",c_start)//从c_start开始索引，得到c_name结束位置
+                if(c_end==-1) c_end=document.cookie.length
+                return unescape(document.cookie.substring(c_start,c_end))
+            }
+        }
+        return "无cookie"
+    }
+</script>
+
+<!--设置带过期时间的cookie-->
+<script>
+    function setCookie(c_name,value,expiredays){
+        var exdate=new Date();
+        exdate.setDate(exdate.getDate()+expiredays);
+        document.cookie=c_name+"="+escape(value)+((expiredays==null)?"":";expires="+exdate.toGMTString());
+    }
+    //使用方法：setCookie（'username','Darren',30）
+</script>
+
+
+</body>
+</html>

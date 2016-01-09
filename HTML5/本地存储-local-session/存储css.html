@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href=""/>
+    <title></title>
+</head>
+<body>
+
+<div class="box">
+</div>
+<script>
+
+    //set()
+    function set(Key) {
+        if (typeof(Storage) !== "undefined") {
+
+            try{
+                localStorage.setItem(Key,"demo");
+            }catch(e){
+                console.log("存储错误，原因："+e)
+            }
+        }
+        else
+        {
+            document.getElementById("result").innerHTML="Sorry, your browser does not support web storage...";
+        }
+    }
+    //get()
+    function get(Key){
+        if(typeof(Storage)!=="undefined") {
+            try{
+            return localStorage.getItem(Key);   //如果想让返回值，必须加return，这样才不会undefined
+        }catch(e){
+            console.log("取不到值原因："+e)
+        }
+            }
+        else
+        {
+            document.getElementById("result").innerHTML="Sorry, your browser does not support web storage...";
+        }
+    }
+
+</script>
+
+</body>
+</html>

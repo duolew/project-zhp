@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+    <!--accesskey是键盘快捷键，支持它的标签有<a>, <area>, <button>, <input>, <label>, <legend> 以及 <textarea>-->
+        例子：<a href="http://www.w3school.com.cn/html/" accesskey="h">HTML</a><br />
+
+    <!--contenteditable 这是一个可编辑段落，看着都可以替代input这种表单了-->
+        例子：<p contenteditable="true">这是一个可编辑段落。</p>
+
+    <!--contextmenu 这个是鼠标右键出现菜单-->
+
+    <!--hidden="hidden"  在xhtml中是禁止简写的-- >
+
+    <!-- item条目列表-->
+    document.body.childNodes[0];
+    <!--item来写-->
+    documetn.body.childNodes.item(0);
+
+    <!--tabindex TAB切换键切换顺序-->
+    <a href="http://www.pengweb.net/" tabindex="2">2</a><br />
+    <a href="http://www.pengweb.net/" tabindex="1">1</a><br />
+    <a href="http://www.pengweb.net/" tabindex="3">3</a>
+
+    <!--input新属性,color,tel,date,datetime,datetime-local,month,week,time,number,email,url,range，reset-->
+
+    <form action="">
+        <input type="email" required/>
+    </form>
+
+    <!--range是一个滑块效果，autocomplete返回滑块属性值,defaultValue这个是默认值value也是可以定义初始值的,max,min，step是步数，就是每移动一下，走多少-->
+    <form action="">
+        <input type="range" min="1" max="10" step="1"  value="6" />
+    </form>
+
+
+
+    <!--required是必填选项，autofocus是加载页面后自动聚焦,multiple可以多选，placeholder是表单提示-->
+    <!--改placeholder颜色-->
+    <!--::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #999;
+    }
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #999;
+    }
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #999;
+    }
+    :-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #999;
+    }-->
+
+
+
+<!--datelist来实现点击输入框，出现自动填充选项-->
+    <input list="browsers">
+
+    <datalist id="browsers">
+        <option value="Internet Explorer">
+        <option value="Firefox">
+        <option value="Chrome">
+        <option value="Opera">
+        <option value="Safari">
+    </datalist>
+
+    <!--keygen 为表单提供一种验证用户的可靠性，分为private key 私钥和public key公钥-->
+    <form action="demo_keygen.asp" method="get">
+        用户名: <input type="text" name="usr_name">
+        加密: <keygen name="security"></keygen>
+        <input type="submit">
+    </form>
+
+
+
+    <!--output用法，不太明白-->
+    <form oninput="x.value=parseInt(a.value)+parseInt(b.value)">0
+        <input type="range" id="a" value="50">100
+        -<input type="number" id="b" value="50">
+        =<output name="x" for="a b"></output>
+    </form>
+
+</body>
+</html>

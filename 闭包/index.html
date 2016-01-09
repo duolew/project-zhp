@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+    <a href='#'> 第一个链接 </a> </br>
+    <a href='#'> 第二个链接 </a> </br>
+    <a href='#'> 第三个链接 </a> </br>
+    <a href='#'> 第四个链接 </a> </br>
+    <script>
+        /*var getA = document.getElementsByTagName("a");
+        for(i=0;i<getA.length;i++){
+            getA[i].index=i;
+            getA[i].onclick=function(){
+                var html = this.innerHTML;
+                var index = this.index;
+                console.log(html);
+                console.log(index);
+            }
+        }*/
+        var getA = document.getElementsByTagName("a");
+        for(i=0;i<getA.length;i++){
+            (function(i){
+                getA[i].index=i;
+                getA[i].onclick=function(){
+                    var index = this.index;
+                    var html = this.innerHTML;
+                    var index = this.index;
+                    console.log(html);
+                    console.log(index);
+                }
+            })(i);
+            /*getA[i].index=i;
+            getA[i].onclick=function(){
+                var html = this.innerHTML;
+                var index = this.index;
+                console.log(html);
+                console.log(index);
+            }*/
+        }
+        /*$("a").each(function(i){
+            $(this).on('click',function(){
+                var txt = $(this).text()
+                alert(txt)
+            })
+        })*/
+    </script>
+</body>
+</html>

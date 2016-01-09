@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>IndexDB</title>
+</head>
+<body>
+
+<script>
+
+    var indexedDB = window.indexedDB || window.msIndexedDB || window.mozIndexedDB || window.webkitIndexedDB;
+
+    var request, db;
+
+    var tableName = 'users';
+
+    var users = [{
+        username: 'aaaa',
+        password: '1111',
+        name: 'AAAA',
+        phone: '1111'
+    }, {
+        username: 'bbbb',
+        password: '2222',
+        name: 'BBBB',
+        phone: '2222'
+    }, {
+        username: 'cccc',
+        password: '3333',
+        name: 'CCCC',
+        phone: '3333'
+    }, {
+        username: 'dddd',
+        password: '4444',
+        name: 'DDDD',
+        phone: '4444'
+    }];
+
+    request = indexedDB.open('zjzhome'); //创建并打开数据库user   删除数据库 indexedDB.deleteDatabase(db)
+
+    request.onupgradeneeded = function(e) {
+        console.log('onupgradeneeded');
+        db = e.target.result;
+//db.setVersion已经废弃
+        console.log(db.version);
+
+        if(!db.objectStoreNames.contains(tableName)) {
+            console.log('need create object store');
+            var store = db.createObjectStore(tableName, { keyPath: 'username' }); //只能在onupgradeneeded事件完成
+
+            store.createIndex('name', 'name', { unique: false }); //创建索引
+            store.createIndex('phone', 'phone', { unique: false });
+        }
+    }
+    request.onerror = function(e) {
+        console.log('some errors happened while try to open: ' + e.target.errorCode);
+    }
+    request.onsuccess = function(e) {
+        console.log('onsuccess');
+        db = e.target.result;
+        console.log(db.version);
+        db.onerror = function(e) {
+            console.log('db error: ' + e.target.errorCode);
+            console.dir(e.target);
+        }
+
+        if(db.objectStoreNames.contains(tableName)) {
+            console.log('contains table: ' + tableName);
+            var transaction = db.transaction([tableName], 'readwrite'); //事务 增删改查
+            transaction.oncomplete = function(e) {
+                console.log('All Done!');
+            }
+            transaction.onerror = function(e) {
+                console.log(e);
+            }
+
+            var objectStore = transaction.objectStore(tableName); //得到表的objectStore对象
+
+            for(var i = 0; i < users.length; i++) {
+                objectStore.add(users[i]); //添加数据 更新数据用put
+            }
+
+            objectStore.openCursor().onsuccess = function(e) { //使用游标遍历数据
+                var cursor = e.target.result;
+                if(cursor) {
+                    console.log(cursor.key);
+                    console.log(cursor.value);
+                    cursor.continue();
+                } else {
+                    console.log('done with the cursor');
+                }
+            }
+
+            objectStore.openCursor().onerror = function(e) {
+                console.log(e);
+            }
+
+            var removeKey = 'aaaa';
+            objectStore.get(removeKey).onsuccess = function(e) { //根据primary key查询
+                console.log(this.result);
+            }
+            objectStore.delete(removeKey); //删除 依然要处理success和error事件，此处省略
+
+            var boundKeyRange = IDBKeyRange.only('BBBB'); //生成表示范围的Range对象
+            objectStore.index('name').openCursor(boundKeyRange).onsuccess = function(e) { //根据索引查询
+                var cursor = e.target.result;
+                if(!cursor) return;
+
+                var rowData = cursor.value;
+                console.log(rowData);
+            }
+        }
+    }
+
+</script>
+
+</body>
+</html>

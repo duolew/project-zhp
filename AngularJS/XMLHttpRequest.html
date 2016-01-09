@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular.min.js"></script>
+
+    <title></title>
+</head>
+<body>
+<!--表格和XMLHttpRequest-->
+<div ng-app="" ng-controller="customerController">
+    <table>
+        <tr ng-repeat="x in names | orderBy:'Country'">     <!--这个是按国家的字母顺序开始排列从A-Z-->
+            <td>{{x.Name}}</td>
+            <td>{{x.Country}}</td>
+        </tr>
+    </table>
+
+</div>
+<script>
+    function customerController($scope,$http){
+        $http.get("Customers_JSON.php")
+                .success(function(response){
+                    $scope.names = response
+                });
+    }
+</script>
+
+
+
+<!--$http的增删改-->
+<script>
+    angular.module("app",[])
+    .config(function($httpProvider){
+    })
+    .controller("MyCtrl",function($scope,$http){
+            $scope.id="";
+            $scope.name="";
+            $scope.adduser=function(){
+               $http.post("Customers_JSON.php",{id:$scope.id,name:$scope.name})
+                       .success(function(resp) {
+                           if (resp.success) {
+                               alert("添加成功")
+                           }
+                       })
+
+            }
+
+            $scope.deluser=function(){
+                $http.post("Customers_JSON_del.php",{id:$scope.id})
+                        .success(function(resp) {
+                            if (resp.success) {
+                                alert("删除成功")
+                            }
+                        })
+            }
+
+
+    })
+</script>
+
+<!--还有一些用法可以查看Service与Provider例子内的http文件-->
+
+</body>
+</html>

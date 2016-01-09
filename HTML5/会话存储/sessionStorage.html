@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+<!--
+极客学院写法
+
+<script type="text/javascript">
+    if(sessionStorage.hits){
+        sessionStorage.hits=Number(sessionStorage.hits)+1;
+    }else{
+        sessionStorage.hits=1;
+    }
+    document.write(sessionStorage.hits);
+</script>
+
+-->
+
+    <!--sessionStorage 方法针对一个 session 进行数据存储。当用户关闭浏览器窗口后，数据会被删除。-->
+    <script>
+        function clickCounter()
+        {
+            if(typeof(Storage)!=="undefined")
+            {
+                if (sessionStorage.clickcount)
+                {
+                    sessionStorage.clickcount=Number(sessionStorage.clickcount)+1;
+                }
+                else
+                {
+                    sessionStorage.clickcount=1;
+                }
+                document.getElementById("result").innerHTML="You have clicked the button " + sessionStorage.clickcount + " time(s) in this session.";
+            }
+            else
+            {
+                document.getElementById("result").innerHTML="Sorry, your browser does not support web storage...";
+            }
+        }
+    </script>
+</head>
+<body>
+<p><button onclick="clickCounter()" type="button">Click me!</button></p>
+<div id="result"></div>
+
+</body>
+</html>

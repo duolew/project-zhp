@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+    <!--
+
+     object store相当于表
+     事务三种模式，只读read，读写readwrite，版本变更verionchange
+
+    var transaction=db.transaction(['students','teacher'])//打开一个事务，使用student和teacher表
+    var objectStore=transaction.objectStore('students'); //获取students的表
+
+    -->
+
+
+<script>
+
+    var myDB={
+        name:'text',          //库名
+        version:10,
+        db:null
+    };
+
+    //创建或打开indexedDB
+    function openDB(name,version){
+        var version_now = version||1;
+        var request=window.indexedDB.open(name,version_now);           //打开数据库
+        request.onerror=function(e){
+            console.log(e.currentTarget.error.message)
+        };
+        request.onsuccess=function(e){
+            myDB.db= e.target.result;
+        };
+        request.onupgradeneeded=function(e){           //当前版本库和之前版本库不一致的时候，则出发onupgradeneeded
+            var db= e.target.result;                     //这里db从新定义
+            if(!db.objectStoreNames.contains('students')){
+                db.createObjectStore('students',{keyPath:"id"});
+            }
+            console.log("版本已经被更改为"+version)
+        };
+    }
+    var students=[{
+        id:1001,
+        name:"Byron",
+        age:24
+    },{
+        id:1002,
+        name:"Frank",
+        age:24
+    },{
+        id:1003,
+        name:"Aaron",
+        age:24
+    }];
+
+
+    function addData(db,storeName){
+        var transaction=db.transaction(storeName,'readwrite');
+        var store=transaction.objectStore(storeName);
+
+        for(var i= 0;i<students.length;i++){
+            store.add(students[i]);
+        }
+    }
+
+
+
+    openDB(myDB.name,myDB.version);
+    /*addData(myDB.db,'students');*/
+    setTimeout(function(){
+        addData(myDB.db,'students');
+    },1000);
+
+
+
+</script>
+
+</body>
+</html>

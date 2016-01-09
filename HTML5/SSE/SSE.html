@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<h1>获取服务端更新数据</h1>
+<div id="result"></div>
+
+<script>
+    if(typeof(EventSource)!=="undefined")    //先来判断浏览器是否支持服务器推送事件
+    {
+        var source=new EventSource("demo_sse.php");    //创建一个新的EventSource对象，然后规定发送更新的页面的url
+        source.onmessage=function(event)              //每接收到一次，就执行一次onmessage事件
+        {
+            document.getElementById("result").innerHTML+=event.data + "<br>";
+        };
+    }
+    else
+    {
+        document.getElementById("result").innerHTML="抱歉，你的浏览器不支持 server-sent 事件...";
+    }
+    var source = new EventSource
+</script>
+
+
+<!--
+
+除了onmessage来触发当接收到消息时事件
+还有onopen 当通往服务器的连接被打开的时候触发
+还有onerror   当发生错误的时候触发
+
+-->
+
+
+
+</body>
+</html>

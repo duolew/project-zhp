@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<canvas id="myCanvas" height="800" width="800" style="border:1px solid #000000">
+</canvas>
+<script>
+    CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
+        //if (w < 2 * r) r = w / 2;
+        //if (h < 2 * r) r = h / 2;
+        this.beginPath();
+        this.moveTo(x+r, y);
+        this.arcTo(x+w, y, x+w, y+h, r);
+        this.arcTo(x+w, y+h, x, y+h, r);
+        this.arcTo(x, y+h, x, y, r);
+        this.arcTo(x, y, x+w, y, r);
+        // this.arcTo(x+r, y);
+        this.closePath();
+        return this;
+    }
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    ctx.strokeStyle="#000000";       //填充矩形内容颜色
+    ctx.lineWidth=1;
+    ctx.roundRect(200,300,200,120,40).stroke();     //绘制矩形
+
+</script>
+<script>
+
+</script>
+</body>
+</html>

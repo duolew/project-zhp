@@ -1,0 +1,61 @@
+*{
+    margin: 0;
+    padding: 0;
+    font: 14px "Microsoft Yahei", "微软雅黑";
+    list-style: none;
+    text-decoration: none;
+}
+
+.tabs{
+    margin: 30px auto;
+    width: 298px;
+    height: 98px;
+    border: 1px solid #000;
+    overflow: hidden;     /*这句话很重要，因为有这个就可以让超出部分来隐藏，但又不影响外边框*/
+}
+.tabs_top{
+    height: 27px;
+    position: relative;
+}
+.tabs_top ul{
+    position: absolute;
+    width: 300px;     /*其实这里300或者大于300都可以，因为超出部分都被隐藏了，所以没关系的*/
+    left: -1px;
+
+    /*border-left: 1px solid red;*/
+    /*border-right: 1px solid red;*/
+}
+.tabs_top ul li{
+    float: left;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    overflow: hidden;
+    background-color: #eeeeee;
+    width: 58px;
+    display: inline;
+    border-bottom: 1px solid #000;
+    padding: 0px 1px;
+}
+.tabs_top ul li.select{   /*如果不加.tabs_top ul li，那这个样式和select的样式同时存在了*/
+    padding: 0px;
+    border-bottom: 1px solid #ffffff;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+}
+.tabs_content{
+    display: none;
+}
+.tabs_content_show{
+    display: block;
+    margin-top: 6px;
+}
+.tabs_content_show ul li{
+    float: left;
+    width: 120px;
+    height: 20px;
+    border: 1px solid #000;
+    overflow: hidden;
+    margin: 1px 3px;
+    padding: 3px 2px;
+}

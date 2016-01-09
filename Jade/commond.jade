@@ -1,0 +1,88 @@
+//
+   Created by zhangpeng on 2015/12/9.
+doctype
+html
+    head
+        meta(charset="UTF-8")
+        title study jade
+    body
+        h1 hahahaa
+        h2.title#title.title2
+        h2.title(#title.title2)
+
+        -var peng={course:'jade',level:'high'}
+        -for(var k in peng)
+         p= peng[k]
+
+        -var peng={course:'jade',level:'high'}
+        -each value,key in peng
+         p #{key}:#{value}
+
+        -var courses=['node','jade','express']
+        -each item in courses
+         p= item
+
+
+        -var sections=[{id:1,items:['a','b']},{id:2,items:['c','d']}]
+        dl haha
+        -each section in sections
+            dt= section.id
+            -each item in section.items
+                dd= item
+
+
+        -var isPeng = true
+        -var lessons = ['jade','node']
+        if lessons
+            if lessons.length>2
+                p more than 2: #{lessons.join(',')}
+            else if lessons.length>1
+                p more than 1: #{lessons.join(',')}
+            else
+                p no lesson
+        else
+            p no lesson
+
+
+        -var name = 'jade'
+        case name
+            when 'java'
+            when 'node'
+                p Hi node!
+            when 'jade'
+                p Hi jade!
+            when 'express': p Hi express!        //这个和jade的结果一样，就是写法不同
+            default
+                p #{name}
+
+
+        mixin study(name,courses)
+            p #{name} stydy
+            ul.courses
+            each course in courses
+                li=course
+        +study('tom',['jade', 'node'])
+
+
+        mixin group(student)
+            h4 #{student.name}
+            +study(student.name,student.courses)
+        +group({name: 'tom', courses: ['jade', 'node']})
+
+
+        mixin team(slogon)
+            h4 #{slogon}
+            if block
+                block
+                p 在上边
+            else
+                p no team
+        +team('slogon')
+            p Gbod job!
+
+
+        mixin magic(name,...items)
+            ul(class='#{name}')
+            each item in items
+                li= item
+        +magic('magic','node','jade')

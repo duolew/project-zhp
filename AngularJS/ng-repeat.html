@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular.min.js"></script>
+    <title></title>
+</head>
+<body>
+    <li ng-repeat="a in list"
+        ng-if="!$last">
+        <h4 >{{$index+1+a.address}}</h4>               <!--$index是给加一个序列号+1+是为了让第一个显示的数字为1-->
+                                                        <!--$first是第一项为true。 $last是最后一项为true，通常用来做判断放在其他ng内,一般都是在li标签这种列表里用-->
+    </li>
+</body>
+</html>

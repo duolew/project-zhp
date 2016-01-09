@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--
+    二次曲线
+    例题：http://tinyurl.com/html5quadratic
+    context.moveTo(69, 263);                  //起始点
+    context.quadraticCurveTo(x1,y1,x2,y2)    //控制点，终点
+
+-->
+
+<canvas id="canvas" width="500" height="500" style="border:1px solid #aaa;display:block;margin:50px auto;"></canvas>
+<script>
+    //下边是arc属性
+    var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
+    canvas.width = 500;
+    canvas.height = 500;
+    context.beginPath();
+    context.arc(50,50,40,40,0,2*Math.PI );     //这个是绘制圆，x,y,r,start，stop,anticlockwise(这个是顺时针false)
+    context.closePath();
+    context.fill();
+
+</script>
+
+
+<!--
+    三次曲线
+    例题：http://tinyurl.com/html5bezier
+    context.moveTo(x0, y0);                  //起始点
+    context.bezierCurveTo(x1,y1,x2,y2，x3,y3)    //控制点，控制点，终点
+
+-->
+</body>
+</html>

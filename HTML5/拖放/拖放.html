@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style type="text/css">
+    #div1 {width:350px;height:70px;padding:10px;border:1px solid #aaaaaa;}
+</style>
+<script>
+    function allowDrop(ev)
+    {
+        ev.preventDefault();
+    }
+
+    function drag(ev)
+    {
+        ev.dataTransfer.setData("Text",ev.target.id);
+    }
+
+    function drop(ev)
+    {
+        ev.preventDefault();
+        var data=ev.dataTransfer.getData("Text");
+        ev.target.appendChild(document.getElementById(data));
+    }
+</script>
+<body>
+    <!--
+
+    先设置draggable="true"声明这个对象是可以拖放的
+    ondragstart="drag(ev)"这是说调用一个函数drag（ev）
+    ev.dataTransfer.setData是设置被拖拽的数据类型和值，例子中数据类型是text，值是拖拽id （“drag1”）记得加引号
+    ondragover是放置目标，默认是不无法将数据放到其他元素中的，所以这里给他一个事件，将他设置允许，需要event.preventDefault();
+    ondrop是放置动作，触发事件
+    ev.target.appendChild(document.getElementById(data));这句话中的ev.target是指的当前被放置的目标位置，document.getElementById(data)是拖动的元素，其中data可以改写成“drag1”记得双引号
+    -->
+    <div id="div1" ondrop="drop(event)"
+         ondragover="allowDrop(event)"></div>
+
+    <img id="drag1" src="http://www.gbtags.com/gb/laitu/336x69" draggable="true"
+         ondragstart="drag(event)" width="336" height="69">
+
+
+
+
+<!--接下来做一个来回拖放的示例-->
+
+
+</body>
+</html>

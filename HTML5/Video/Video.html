@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+    <!--
+
+    video支持多个source
+    controls是来控制有没有控制条的，去掉就没有控制条
+
+    -->
+    <div style="text-align:center">
+        <button onclick="playPause()">播放/暂停</button>
+        <button onclick="makeBig()">放大</button>
+        <button onclick="makeSmall()">缩小</button>
+        <button onclick="makeNormal()">普通</button>
+        <br>
+        <video id="video1" width="420" controls>
+            <source src="mov_bbb.mp4" type="video/mp4">
+            <source src="mov_bbb.ogg" type="video/ogg">
+            您的浏览器不支持 HTML5 video 标签。
+        </video>
+    </div>
+
+    <script>
+        var myVideo=document.getElementById("video1");
+
+        function playPause()
+        {
+            if (myVideo.paused)             /*判断现在状态，是否是暂停状态*/
+                myVideo.play();             /*播放事件*/
+            else
+                myVideo.pause();             /*暂停事件*/
+        }
+
+        function makeBig()
+        {
+            myVideo.width=560;
+        }
+
+        function makeSmall()
+        {
+            myVideo.width=320;
+        }
+
+        function makeNormal()
+        {
+            myVideo.width=420;
+        }
+    </script>
+
+
+<!--为了兼容性，兼容不支持html5的浏览器最好写成-->
+    <video width="320" height="240" controls>                     <!--利用的html5-->
+        <source src="movie.mp4" type="video/mp4">
+        <source src="movie.ogg" type="video/ogg">
+        <source src="movie.webm" type="video/webm">
+        <object data="movie.mp4" width="320" height="240">         <!--加载一个flash-->
+            <embed src="movie.swf" width="320" height="240">       <!--嵌入一个flash-->
+        </object>
+    </video>
+
+<!--还有一种方法，用点击链接的方式，调用本地播放器来播放-->
+    <a href="intro.swf">Play a video file</a>
+
+
+</body>
+</html>

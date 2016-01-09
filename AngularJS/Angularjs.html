@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular.min.js"></script>
+    <!--<script src="//www.runoob.com/try/angularjs/1.2.5/angular.min.js"></script>-->
+    <title>Angular笔记</title>
+</head>
+<body>
+<!--
+
+一、基本命令
+ng-deirectives     扩展HTML
+ng-app             定义一个应用程序         （定义一个应用程序）
+ng-model           把元素值绑定到应用程序   （数据--程序）
+ng-bind            把应用程序绑定到HTML视图（程序--视图）
+ng-repeat          类似于遍历一遍写成 ng-repeat="x in name"   特有属性（$index,$first,$last）
+ng-disabled        直接绑定应用程序到HTML的的disabled属性
+ng-click           点击事件
+ng-hide            隐藏元素
+ng-show            显示元素
+ng-if              也是显示和隐藏效果，但是他是移出DOM操作，就是删除整个html，而上边则不会
+ng-submit          让表单有提交功能（详情：http://abgne.tw/angularjs/angularjs-getting-stared/ng-submit.html）
+
+-----------------------------------------------------
+ng-checked          ng-checked="user.sex=='1'"
+ng-src              ng-src="{{user.icon}}"
+ng-href
+ng-calss            ng-class="{'tr':user.showicon}"
+ng-selected
+
+
+
+-->
+<!--<div ng-app="">                                          &lt;!&ndash;&ndash;&gt;
+    <p>在输入框中尝试输入：</p>
+    <p>姓名：<input type="text" ng-model="name"></p>
+    <p ng-bind="name"></p>                              //ng-bind用法
+</div>-->
+
+
+<div ng-app="" ng-controller="personController">    <!--控制器 -->                                       <!---->
+
+    <p>姓：<input type="text" ng-model="person.firstName"></p>
+    <p>名：<input type="text" ng-model="person.lastName"></p>
+    <p>{{fullName()}}</p>
+</div>
+
+<script>
+    function personController($scope){
+        $scope.person={
+            firstName:"DOJ",
+            lastName:"Lil",
+        };
+        $scope.fullName=function(){
+            return $scope.person.firstName + $scope.person.lastName;
+        }
+    }
+
+</script>
+
+
+
+</body>
+</html>

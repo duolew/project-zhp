@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--
+
+module----config   filter   directive   factory/service/provider/value   controller
+            |
+         routes
+
+
+    $emit只能向parent controller传递event与data        (HTML的同级及上级)
+    $broadcast只能向child controller传递event与data    (HTML的同级及下级)
+    $on用于接收event与data
+
+    $scope是一个原形函数
+    $scope.$watch()      监听
+    $scope.$apply()      替换成*函数
+    $是树形结构，与DOM平行
+    子$scope会继承$scope的属性和方法
+    每个应用只有一个$scope
+    $scope可以向上向下传播事件，类似Dom
+    通过angular.element($0).scope()进行调试
+
+    5个过程--创建-监控-检测模型变化-观察模型是不是脏啊-自动销毁或者手动销毁不用的模型
+
+    路由原理：①哈希#  ②HTML5的History的新API
+
+    指令：templateUrl
+    加载阶段（找ng-app）-编译阶段（遍历DOM，找到所有指令）-链接阶段
+
+
+-->
+
+templateCache
+
+<!--var myModule = angular.module("MyModule", []);
+
+//注射器加载完所有模块时，此方法执行一次
+myModule.run(function($templateCache){
+$templateCache.put("hello.html","<div>Hello everyone!!!!!!</div>");    //先缓存模板 用put
+});
+
+myModule.directive("hello", function($templateCache) {
+return {
+restrict: 'AECM',
+template: $templateCache.get("hello.html"),             //之后在get出来这个模板
+replace: true
+}
+});-->
+
+
+</body>
+</html>

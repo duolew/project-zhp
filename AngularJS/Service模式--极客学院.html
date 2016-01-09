@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular.min.js"></script>
+    <title></title>
+</head>
+<body>
+
+<!--
+
+Service表现形式
+value  constant factory service provider()
+
+
+-->
+
+
+<div ng-app="app" ng-controller="MyCtrl">    <!--控制器 -->
+    <p>{{msg}}</p>
+    <p>{{realname}}</p>
+    <p>{{http}}</p>
+    <p>{{date.msg}}</p>
+    <p>{{uname}}</p>
+</div>
+
+<script>
+    angular.module("app",[])
+        .value("realname",'zhouliu')             //value可以改变
+        .constant("http","www.baidu.com")        //constant 不可以改变
+        .factory("Data",function(){
+            return{                              //factory和service主要区别就是他要先return，还有就是this
+                msg:"你好啊",
+                setMsg:function(){
+                this.msg="我"
+            }
+            }
+        })
+        .service("User",function(){           //service类似于factory，这个可以理解为全局变量，所以在哪里都可以调用
+                this.firstName="上官";
+                this.lastName="飞燕 ";
+                this.getName=function(){
+                    return this.firstName+this.lastName;
+                }
+            })
+        .controller("MyCtrl",function($scope,realname,http,Data,User){                //依赖注入
+        $scope.msg="您好";
+        $scope.realname=realname;
+        $scope.http=http;
+        $scope.date=Data;
+        Data.setMsg();             //这个是让Data这个参数从新取值为setMsg
+        $scope.uname=User.getName();
+    })
+
+</script>
+</body>
+</html>

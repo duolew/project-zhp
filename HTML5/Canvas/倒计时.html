@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="digjs.js"></script>
+    <title></title>
+    <style>
+        body{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" style="width: 100%; height: 100%;"></canvas>
+<script>
+
+    var WINDOW_WIDTH = document.body.clientWidth;
+
+    var WINDOW_HEIGHT = document.body.clientHeight;
+
+    var MARGIN_LEFT = Math.round(WINDOW_WIDTH /10);
+    var MARGIN_TOP = Math.round(WINDOW_HEIGHT /5);
+
+    var RADIUS =Math.round(WINDOW_WIDTH*4/5/108)-1;
+
+
+   console.log(RADIUS);
+    var balls=[];
+    const colors = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"];
+
+    window.onload = function(){
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+        canvas.width = WINDOW_WIDTH;
+        canvas.height = WINDOW_HEIGHT;
+        curShowTimeSeconds = getCurrentShowTimeSeconds();
+        //第四步，让时间数开始循环，通过update()来更新
+        setInterval(function(){
+            render(context);
+            update();
+        },50);
+
+    }
+    //第五步，让这个电子钟循环起来，记得更新之前要清空矩形
+    function update(){
+        var nextShowTimeSeconds = getCurrentShowTimeSeconds();   //因为是在setInterval里循环，所以curShowTimenSeconds一直都是上边得到的值，必须通过update从新取一次才行，要不然是不变的
+
+
+        //上边这些就已经足够让数字进行循环了，下边是为了方便出现彩色的小球才做的定义
+        var nextHours =parseInt(nextShowTimeSeconds/3600);
+        var nextMinutes = parseInt((nextShowTimeSeconds/60)%60);
+        var nextSeconds = nextShowTimeSeconds%60;
+
+        var curHours = parseInt( curShowTimeSeconds / 3600);
+        var curMinutes = parseInt((curShowTimeSeconds/60)%60);
+        var curSeconds = curShowTimeSeconds % 60;
+
+        //第六步，来判断哪个数字变化了，给变化的数字增加彩色小球
+        if(nextSeconds != curSeconds){
+            //下边分别比较他们的时分秒，看是否相同，不同的话，来触发addBalls()
+            if(parseInt(nextHours/10) != parseInt(curHours/10)){
+                addBalls(MARGIN_LEFT,MARGIN_TOP,parseInt(nextHours/10));
+            }
+            if(parseInt(nextHours%10) != parseInt(curHours%10)){
+                addBalls(MARGIN_LEFT+15*(RADIUS+1),MARGIN_TOP,parseInt(nextHours%10));
+            }
+            if(parseInt(nextMinutes/10) != parseInt(curMinutes/10)){
+                addBalls(MARGIN_LEFT+39*(RADIUS+1),MARGIN_TOP,parseInt(nextMinutes/10));
+            }
+            if(parseInt(nextMinutes%10) != parseInt(curMinutes%10)){
+                addBalls(MARGIN_LEFT+54*(RADIUS+1),MARGIN_TOP,parseInt(nextMinutes%10));
+            }
+            if(parseInt(nextSeconds/10) != parseInt(curSeconds/10)){
+                addBalls(MARGIN_LEFT+78*(RADIUS+1),MARGIN_TOP,parseInt(nextSeconds/10));
+            }
+            if(parseInt(nextSeconds%10) != parseInt(curSeconds%10)){
+                addBalls(MARGIN_LEFT+93*(RADIUS+1),MARGIN_TOP,parseInt(nextSeconds%10));
+            }
+            curShowTimeSeconds = nextShowTimeSeconds;
+
+        }
+        updateBalls();
+        //console.log(balls.length)
+    }
+
+    //第七步，给变化的数字增加小球，推送到balls的数组内，只是推送到数组内把属性，并没有绘制小球，只是定义了一个数组，来存储属性，在第二步下边那给画出来了。
+
+    function addBalls(x,y,num){
+        for(i=0;i<digit[num].length;i++){
+            for(j=0;j<digit[num][i].length;j++){
+               if(digit[num][i][j]==1){
+                    var aBall ={
+                        x:x+2*j*(RADIUS+1)+(RADIUS+1),
+                        y:y+2*i*(RADIUS+1)+(RADIUS+1),
+                        g:1.5+Math.random(),
+                        vx:Math.pow(-1,Math.ceil(Math.random()*10))*4,
+                        vy:-5,
+                        color: colors[ Math.floor( Math.random()*10 ) ]
+                        };
+
+                   balls.push(aBall);
+
+               }
+            }
+        }
+    }
+
+    //第八步，来让数组内的属性，来分别组成小球并让小球动起来
+    function updateBalls(){
+        for(i=0;i<balls.length;i++){      //因为所有的小球都要表现出来，所以for出来
+            balls[i].x+=balls[i].vx;
+            balls[i].y+=balls[i].vy;
+            balls[i].vy+=balls[i].g;
+            if(balls[i].y>=WINDOW_HEIGHT-RADIUS){
+                balls[i].y=WINDOW_HEIGHT-RADIUS;
+                balls[i].vy=-balls[i].vy*0.75
+            }
+        }
+
+        /*for(i=0;i<balls.length;i++){        //这种方法是自己想的，比较好理解
+             if(balls[i].x>WINDOW_WIDTH||balls[i].x<0){
+             balls.splice(i,1)   //超出后，删除当前值，splice的意思是删除角标为i的后1个数组（含角标元素），所以这个相当于删除其自身！！
+             }
+        }*/
+        var cnt = 0
+        for( var i = 0 ; i < balls.length ; i ++ )
+            if( balls[i].x + RADIUS > 0 && balls[i].x -RADIUS < WINDOW_WIDTH )
+                balls[cnt++] = balls[i]
+
+        while( balls.length > cnt ){
+            //console.log(balls)
+            balls.pop();     //删后push进去的，是因为删掉前边的就显得空了，不能还没走到头就给人家删掉，所以这里用的pop（）；完全可以把上边的push换成unshift，然后下边的用pop();
+        }
+
+    }
+
+    //第三步，获取倒计时的具体时间数
+    function getCurrentShowTimeSeconds(){
+        var date_now = new Date();
+        var date_after = new Date(2015,6,29,11,11,11);   //记住月份是要提前一个月的，1月是0
+        var time_after = date_after.getTime();
+        var time = Math.round((time_after-date_now.getTime())/1000);
+        return time>=0?time:0;
+    }
+    function render(cxt){
+        cxt.clearRect(0,0,WINDOW_WIDTH,WINDOW_HEIGHT);  //清空矩形，x,y,width,height
+
+        var hours = parseInt(curShowTimeSeconds/3600);
+        var minutes = parseInt((curShowTimeSeconds/60)%60);
+        var seconds = curShowTimeSeconds%60;
+
+
+    //（第二步，给出相应的变量，来设置数字的位置）这个是先给每个大数字来设定一个起始位置的初始值，通过renderDigit来分别将圆分布开
+    renderDigit(MARGIN_LEFT,MARGIN_TOP,parseInt(hours/10),cxt);
+    renderDigit(MARGIN_LEFT+15*(RADIUS+1),MARGIN_TOP,parseInt(hours%10),cxt);
+    renderDigit(MARGIN_LEFT+30*(RADIUS+1),MARGIN_TOP,10,cxt);
+    renderDigit(MARGIN_LEFT+39*(RADIUS+1),MARGIN_TOP,parseInt(minutes/10),cxt);
+    renderDigit(MARGIN_LEFT+54*(RADIUS+1),MARGIN_TOP,parseInt(minutes%10),cxt);
+    renderDigit(MARGIN_LEFT+69*(RADIUS+1),MARGIN_TOP,10,cxt);
+    renderDigit(MARGIN_LEFT+78*(RADIUS+1),MARGIN_TOP,parseInt(seconds/10),cxt);
+    renderDigit(MARGIN_LEFT+93*(RADIUS+1),MARGIN_TOP,parseInt(seconds%10),cxt)
+
+
+        //（！！！！！！很重要！！！！！）之前那个数组只是小球的属性，在这里让他显示出来
+        for( var i = 0 ; i < balls.length ; i ++ ){
+            cxt.fillStyle=balls[i].color;
+
+            cxt.beginPath();
+            cxt.arc( balls[i].x , balls[i].y , RADIUS , 0 , 2*Math.PI , true );
+            cxt.closePath();
+
+            cxt.fill();
+        }
+
+
+    }
+    //（第一步，先循环，试图画出整个图形）一共是三层，但是num就是第一层是通过上边的数据给出的，所以这里不去循环
+    function renderDigit(x,y,num,cxt){
+        for(i=0;i<digit[num].length;i++){
+            for(j=0;j<digit[num][i].length;j++) {
+                if(digit[num][i][j]==1){
+                    cxt.beginPath();
+                    cxt.arc(x+2*j*(RADIUS+1)+(RADIUS+1),y+2*i*(RADIUS+1)+(RADIUS+1),RADIUS,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fillStyle="rgb(0,102,153)";
+                    cxt.fill();
+                }
+            }
+
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<!--
+W3C标准：http://www.w3.org/TR/2dcontext/
+canvas的边是可以设置的，可以设置成cxt.canvas.width和cxt.canvas.height这样就可以自动获取画布的大小了
+
+ctx.moveTo(0,0);                 绘制线【起点】
+ctx.lineTo(150,150);             绘制线【中间/结束点】
+ctx.arc(50,50,20,0,2*Math.PI);   绘制圆
+ctx.fillRect(0,0,150,150);       绘制矩形
+ctx.font="30px Arial"            绘制文本
+ctx.drawImage(img,10,10)         绘制图片
+
+ctx.fillStylt=''   填充区域的属性（color,gradient,image-图片,canvas,video）
+ctx.strokeStyle=''   填充边框的属性
+ctx.fill()是填充
+ctx.stroke()是描边
+
+---样式---
+线性渐变色：
+①var grd= ctx.createLinearGradient(xstart,ystart,xend,yend)   //设置渐变方向
+②grd.addColorStop(stop,color)
+径向渐变色：
+①var grd=ctx.createRadialGradient(75,50,15,90,60,60);     //起始颜色的x,y,r和结束颜色的x,y,r
+②grd.addColorStop(stop,color)
+图片样式：creatPattern                           //其中img也可以是canvas,或者video
+var grd= ctx.createPattern(img,repeat-style)  //repeat-style:no-repeat、repeat-x、repeat-y、repeat
+
+
+
+
+---图像属性---
+ctx.lineWidth=10;    设置线宽
+ctx.lineCap = "butt"     其中butt是默认属性，round两边为半圆，square两边为矩形
+ctx.lineJoin ="miter"     miter是默认的   bevel是平角的   round圆角
+ctx.miterLimit=10        默认属性是10
+
+
+--图形变换--
+位移--translate(x,y)
+旋转--rotate(deg)
+缩放--scale(sx,sy)--缩放的时候边框会同时进行缩放，且X,Y轴坐标也会相应的进行缩放，都是按倍数缩放
+
+做变换的时候需要保存和恢复，避免后边叠加前边的属性；
+context.save();
+进行图形操作
+context.restore();
+
+---变换矩阵[同时解决上边三个参数的效果]---
+a c e
+b d f
+0 0 1
+a：水平缩放
+b: 水平倾斜
+c: 垂直倾斜
+d: 垂直缩放
+e: 水平位移
+f: 垂直位移
+
+transform(a,b,c,d,e,f)----会发生级联效果，就是综合上边所有的效果相加
+setTransform（a,b,c,d,e,f）----避免发生级联效果
+
+____________________________________________________________
+高级内容：
+1.阴影的绘制
+context.shadowColor
+context.shadowOffsetX
+context.shadowOffsetY
+context.shadowBlur
+
+2.透明度和图像遮挡时候的效果
+context.globalAlpha
+context.globalCompositeOperation= 一共有11种效果
+source-over     后绘制的图形完全压盖在先绘制的图形上
+source-atop     剪掉后绘制图超出先绘制图部分
+source-in       剪掉后绘制图超出先绘制图部分且只显示后绘制图形，且不显示先绘制图形（显示后绘制图）
+source-out      剪掉后绘制图和先绘制图重合部分即只显示超出部分，且不显示先绘制图形（显示后绘制图）
+destination-over    先绘制的图形压盖在后绘制图形的上边
+destination-atop    剪掉先绘制图形超出后绘制图部分，显示保留先绘制图颜色+后绘制图颜色
+destination-in      显示先绘制和后绘制重合部分，且只显示先绘制图颜色
+destination-out     剪掉后绘制图部分，只显示先绘制图颜色
+lighter             重合部分，颜色进行中和
+copy                完全且只复制一次后绘制图形
+xor                 异或操作，重叠部分删除
+
+3.剪辑区域
+context.clip()
+
+例子：在圆为路径内绘制文字
+context.arc()          //圆不用绘制出来
+context.clip()
+context.fillText()     //需要绘制出来
+
+4.非零环绕原则
+从中间引出一条线，另相交线的方向相加，最终为非零区域显示颜色，为0区域显示为空，创建镂空效果，镂空阴影
+
+5.isPointInpath
+context.isPointInPath(x,y)    判断当前点 是否在所规划的路径内
+
+//鼠标点击，获取在canvas中的坐标
+var x=event.clientX-canvas.getBoundingClientRect().left;    //点击位置相对于显示器的x轴减去canvas盒子的x轴
+var y=event.clientY-canvas.getBoundingClientRect().top;     //getBoundingClientRect() 是获得包围框的属性，是js的属性
+
+function detect（event）{
+    var x=event.clientX-canvas.getBoundingClientRect().left;
+    var y=event.clientY-canvas.getBoundingClientRect().top;
+
+    for(var i=0;i<balls.length;i++){
+        context.begin();
+        context.arc(balls[i].x,balls[i].y,ball[i].r,0,2*Math.PI)    //先循环查询所有绘制的圆的路径
+
+        if(context.isPointInPath(x,y)){                     //判断所选的点是否在所绘制的圆内
+            context.fillStyle="red";                        //如果在的话，就进行变色
+            context.fill();                                 //将变色属性绘制出来
+        }
+    }
+}
+
+
+6.context的扩展--CanvasRenderingContext2D
+
+CanvasRenderingContext2D.prototype.fillStar=function(r,R,x,y,rot){
+    cxt.beginPath();
+            for (var i = 0; i < 5; i++) {
+                cxt.lineTo(Math.cos((18 + i * 72 - rot) * Math.PI / 180) * R + x,     //300是半径，cos内是弧度数，弧度数=圆心角*Math.PI/180
+                        -Math.sin((18 + i * 72 - rot) * Math.PI / 180) * R + y
+                )
+                cxt.lineTo(Math.cos((54 + i * 72 - rot) * Math.PI / 180) * r + x,     //300是半径，cos内是弧度数，弧度数=圆心角*Math.PI/180
+                        -Math.sin((54 + i * 72 - rot) * Math.PI / 180) * r + y
+                )
+            }
+            cxt.closePath();
+
+            context.fill();
+}
+
+上边就是定义了一个fillStar这样一个五角星，以后就可以通过下边这种方法调用了
+context.fillStyle="#058"
+context.fillStar(r,R,x,y,rot)
+
+
+7.兼容性
+if（context.ellipse）{}            //判断是否兼容ellipse函数
+
+explorecanvas   这个插件库，可以引入我了兼容ie
+
+
+8.Canvas图形库
+①canvasplus
+②Artisan JS     --野心大
+③Rgraph         --柱状图，点状图
+
+
+-->
+
+   <!--绘制矩形-->
+    <canvas id="myCanvas" height="200" width="200" style="border:1px solid #000000">
+    </canvas>
+    <script>
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        ctx.fillStyle="#000000";       //填充矩形内容颜色
+        ctx.fillRect(0,0,150,150);     //绘制矩形
+    </script>
+
+
+<!--绘制线-->
+    <canvas id="myCanvas1" height="200" width="200" style="border:1px solid #000000">
+    </canvas>
+    <script>
+        var c = document.getElementById("myCanvas1");
+        var ctx = c.getContext("2d");
+        ctx.moveTo(0,0);              //线的起始位置
+        ctx.lineTo(150,160);          //线的结束位置
+        ctx.stroke();                 //线的宽度，变实线
+        ctx.lineWidth=10;              //设置直线宽度
+
+    </script>
+
+
+<!--绘制圆-->
+
+
+<canvas id="myCanvas2" height="200" width="200" style="border:1px solid #000000">
+</canvas>
+<script>
+    var c = document.getElementById("myCanvas2");
+    var ctx = c.getContext("2d");
+    ctx.beginPath();                 //重置当前路径
+    ctx.arc(50,50,20,0,2*Math.PI); //x,y,r,start，stop,anticlockwise(这个是顺时针false)
+    ctx.fill();                 //设置为实心的
+</script>
+
+
+<!--绘制文本
+
+context.textAlign = left/center/right      (都参考线在文字的左，中，右边)
+context.textBaseline = top/middle/bottom/alphabetic(default)
+context.measureText(string).width    //获得文字的宽度的数值，记得吧string换成文字叫""
+-->
+
+
+<canvas id="myCanvas3" height="200" width="200" style="border:1px solid #000000">
+</canvas>
+<script>
+    var c = document.getElementById("myCanvas3");
+    var ctx = c.getContext("2d");
+    ctx.font="30px Arial" //font-style(italic斜体),font-variant(small-caps小型大写字母),font-weight(),fong-size(),font-family()
+    ctx.fillText("Hello World",50,50)    //填充型文字，坐标为50,50，内容是helloworld
+    //ctx.strokeText("Hello World",50,50)    这个是空心的
+</script>
+
+
+
+
+<!--
+
+线性渐变和径向渐变
+径向渐变改成var grd=ctx.createRadialGradient(75,50,15,90,60,60);
+分别表示，起始颜色的x,y,r和结束颜色的x,y,r
+
+-->
+<canvas id="myCanvas4" height="200" width="200" style="border:1px solid #000000">
+</canvas>
+<script>
+    var c = document.getElementById("myCanvas4");
+    var ctx = c.getContext("2d");
+    //下边创建渐变
+    var grd= ctx.createLinearGradient(0,0,200,0)   //设置渐变方向
+    grd.addColorStop(0.0,"red");           //设置起始颜色
+    //这中间可以添加无数个属性，在0-1之间就可以
+    grd.addColorStop(1.0,"white");         //设置结束颜色
+
+    //下边填充图形，用之前设置好的渐变
+    ctx.fillStyle=grd;                 //设置填充方法为渐变
+    ctx.fillRect(10,10,150,150)       //设置填充的矩形大小
+
+</script>
+
+<!--背景用图片绘制，类似于渐变-->
+<canvas id="myCanvas6" height="600" width="600" style="border:1px solid #000000">
+</canvas>
+<script>
+    var c = document.getElementById("myCanvas6");
+    var ctx = c.getContext("2d");
+    //创建一个图片
+    var backgroundimg = new Image();     //new一个image
+    backgroundimg.src="4.jpg";
+
+    //下边创建背景图片
+    var grd= ctx.createPattern(backgroundimg,"repeat")   //设置背景图片,repeat用引号
+
+    //下边填充图形，用之前设置好的背景图
+    ctx.fillStyle=grd;                 //设置填充方法为渐变
+    ctx.fillRect(0,0,600,600)       //设置填充的矩形大小
+
+</script>
+
+<!--上边那个img也可以换成canvas对象-->
+<canvas id="myCanvas7" height="600" width="600" style="border:1px solid #000000">
+</canvas>
+<script>
+    var c = document.getElementById("myCanvas7");
+    var ctx = c.getContext("2d");
+    //创建一个图片
+    var backCanvas = createBackgroundCanvas();
+
+    //下边创建背景图片
+    var grd= ctx.createPattern(backCanvas,"repeat")   //设置背景图片,repeat用引号
+
+    //下边填充图形，用之前设置好的背景图
+    ctx.fillStyle=grd;                 //设置填充方法为渐变
+    ctx.fillRect(0,0,600,600)       //设置填充的矩形大小
+
+    function createBackgroundCanvas(){
+        //在这里创建一个canvas对象，作为背景
+        var backcanvas = document.createElement("canvas");
+        //在这个地方添加一个星星，往下就不写了
+    }
+
+</script>
+
+<!--绘制图片-->
+
+
+<canvas id="myCanvas5" height="200" width="200" style="border:1px solid #000000">
+</canvas>
+<script>
+    var c = document.getElementById("myCanvas5");
+    var ctx = c.getContext("2d");
+    var img=document.getElementById("scream");
+    ctx.drawImage(img,10,10)
+</script>
+
+
+</body>
+</html>

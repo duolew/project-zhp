@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>   <!--记得这个要放在自定义的js的前边-->
+    <script type="text/javascript">
+    !window.jQuery && document.write('<script src="http://www.pengweb.net/jquery-1.11.2.min.js"><\/script>');
+    </script>
+    <script type="text/javascript" src="message.js"></script>
+</head>
+<body>
+    <div class="main" >
+        <div class="contentList"></div>
+        <div class="sendCon">
+            <div class="putCon">
+                <textarea rows="8" cols="30" >请输入您要留言的内容</textarea>
+                <span id="txtSpan"></span>
+            </div>
+            <div class="nameBtn">
+                <input id="name" type="text" value="姓名"/>
+                <span id="namenSpan"></span>
+                <input id="sendBtn" type="button" value="发送"/>
+            </div>
+        </div>
+        <span id="tip"></span>    <!--留言成功-->
+    </div>
+</body>
+</html>

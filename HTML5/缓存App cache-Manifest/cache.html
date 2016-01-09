@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--<html manifest="demo.appcache">-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<!--
+
+供离线浏览
+扩展名为appcache
+
+manifest 文件可分为三个部分：
+CACHE MANIFEST - 在此标题下列出的文件将在首次下载后进行缓存
+NETWORK - 在此标题下列出的文件需要与服务器的连接，且不会被缓存
+FALLBACK - 在此标题下列出的文件规定当页面无法访问时的回退页面（比如 404 页面）
+
+例1：（加载后对theme.css,logo.gif,main.js进行离线缓存）
+CACHE MANIFEST
+/theme.css
+/logo.gif
+/main.js
+
+例2：（对login.php文件不进行缓存，如果用*代替，就是所有文件都不缓存，都要联网）
+NETWORK:
+/login.php
+
+例3：如果无法建立网络连接，则跳转到offline.html这个网址，可以是404错误
+FALLBACK:
+/html/ /offline.html
+
+更新缓存技巧：
+可以给manifest文件加时间注释，如果时间注释被改变，则被重新加载更新，注释用#开头
+
+CACHE MANIFEST
+# 2012-02-21 v1.0.0
+/theme.css
+/logo.gif
+/main.js
+
+NETWORK:
+login.php
+
+FALLBACK:
+/html/ /offline.html
+
+-->
+
+
+
+</body>
+</html>

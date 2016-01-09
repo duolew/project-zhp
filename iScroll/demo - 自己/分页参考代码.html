@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script>
+    /*
+
+
+                        这个文档是在做分页时候的参考代码
+
+
+
+    */
+    $(function () {
+        var i = 1;
+
+        $(window).scroll(function () {
+            var scrollTop = 0;
+            var clientHeight = 0;
+            var scrollHeight = 0;
+            var replaceAppNo = $("input[name='replaceAppNo']").val();
+            if (document.documentElement && document.documentElement.scrollTop) {
+                scrollTop = document.documentElement.scrollTop;
+            } else if (document.body) {
+                scrollTop = document.body.scrollTop;
+            }
+            if (document.body.clientHeight && document.documentElement.clientHeight) {
+                clientHeight = (document.body.clientHeight < document.documentElement.clientHeight) ? document.body.clientHeight : document.documentElement.clientHeight;
+            } else {
+                clientHeight = (document.body.clientHeight > document.documentElement.clientHeight) ? document.body.clientHeight : document.documentElement.clientHeight;
+            }
+            scrollHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+            if (scrollTop + clientHeight == scrollHeight) {
+                $.getJSON("*****Action_getAjaxList.action", {page: i, replace_App_No: replaceAppNo}, function (json) {
+                    $.each(json, function (n, value) {
+                        var trs = "";
+                        trs += "<tr><td align='center'><input type='checkbox'></td><td align='center'>" + (value.quaNo == undefined ? '' : value.quaNo) + "</td><td align='center'>" + (value.chaVin == undefined ? '' : value.chaVin) + "</td><td align='center'>" + (value.prdModelNo == undefined ? '' : value.prdModelNo) + "</td><td width='10%' align='right'>" + value.quaMone + "</td><td align='center'>" + (value.facDate == undefined ? '' : value.facDate) + "</td><td align='center'>" + (value.accDate == undefined ? '' : value.accDate) + "</td><td width='6%' align='center'>" + (value.cerType == undefined ? '' : value.cerType) + "</td><td align='center'>" + (value.brandNo == undefined ? '' : value.brandNo) + "</td></tr>";
+                        $("#tablist tr:last").after(trs);
+                    });
+                });
+                i++;
+            }
+        });
+    });
+</script>
+<script>
+    function getJSONData(pn) {
+        // alert(pn);
+        $.getJSON("blackList.ce", function(data) {
+            var totalCount = data.totalCount; // 总记录数
+            var pageSize = 10; // 每页显示几条记录
+            var pageTotal = Math.ceil(totalCount / pageSize); // 总页数
+            var startPage = pageSize * (pn - 1);
+            var endPage = startPage + pageSize - 1;
+            var $ul = $("#json-list");
+            $ul.empty();
+            for (var i = 0; i < pageSize; i++) {
+                $ul.append('<li class="li-tag"></li>');
+            }
+            var dataRoot = data.jsonRoot;
+            if (pageTotal == 1) {     // 当只有一页时
+                for (var j = 0; j < totalCount; j++) {
+                    $(".li-tag").eq(j).append("<span class='col1'><input type='checkbox' value='"+parseInt(j + 1)+"'/></span>")
+                            .append("<span class='col2'>" + parseInt(j + 1)
+                                    + "</span>").append("<span class='col3'>" + dataRoot[j].mobile
+                            + "</span>").append("<span class='col4'>" + dataRoot[j].province
+                            + "</span>").append("<span class='col5'>" + dataRoot[j].gateway
+                            + "</span>").append("<span class='col6'>" + dataRoot[j].insertTime
+                            + "</span>").append("<span class='col7'>" + dataRoot[j].remark
+                            + "</span>")
+                }
+            } else {
+                for (var j = startPage, k = 0; j < endPage, k < pageSize; j++, k++) {
+                    if( j == totalCount){
+                        break;       // 当遍历到最后一条记录时，跳出循环
+                    }
+                    $(".li-tag").eq(k).append("<span class='col1'><input type='checkbox' value='"+parseInt(j + 1)+"'/></span>")
+                            .append("<span class='col2'>" + parseInt(j + 1)
+                                    + "</span>").append("<span class='col3'>" + dataRoot[j].mobile
+                            + "</span>").append("<span class='col4'>" + dataRoot[j].province
+                            + "</span>").append("<span class='col5'>" + dataRoot[j].gateway
+                            + "</span>").append("<span class='col6'>" + dataRoot[j].insertTime
+                            + "</span>").append("<span class='col7'>" + dataRoot[j].remark
+                            + "</span>")
+                }
+            }
+            $(".page-count").text(pageTotal);
+        })
+    }
+    function getPage() {
+        $.getJSON("blackList.ce", function(data) {
+            pn = 1;
+            var totalCount = data.totalCount; // 总记录数
+            var pageSize = 10; // 每页显示几条记录
+            var pageTotal = Math.ceil(totalCount / pageSize); // 总页数
+            $("#next").click(function() {
+                if (pn == pageTotal) {
+                    alert("后面没有了");
+                    pn = pageTotal;
+                } else {
+                    pn++;
+                    gotoPage(pn);
+                }
+            });
+            $("#prev").click(function() {
+                if (pn == 1) {
+                    alert("前面没有了");
+                    pn = 1;
+                } else {
+                    pn--;
+                    gotoPage(pn);
+                }
+            })
+            $("#firstPage").click(function() {
+                pn = 1;
+                gotoPage(pn);
+            });
+            $("#lastPage").click(function() {
+                pn = pageTotal;
+                gotoPage(pn);
+            });
+            $("#page-jump").click(function(){
+                if($(".page-num").val()  <= pageTotal && $(".page-num").val() != ''){
+                    pn = $(".page-num").val();
+                    gotoPage(pn);
+                }else{
+                    alert("您输入的页码有误！");
+                    $(".page-num").val('').focus();
+                }
+            })
+            $("#firstPage").trigger("click");
+
+        })
+    }
+    function gotoPage(pn) {
+        // alert(pn);
+        $(".current-page").text(pn);
+        getJSONData(pn)
+    }
+
+    $(function() {
+        getPage();
+    })
+
+</script>
+</body>
+</html>

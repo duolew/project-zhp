@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS3 Full Background Slider </title>
+    <style type="text/css">
+        body{
+            margin: 0;
+            padding: 0;
+            font: 14px "Arial";
+        }
+        .bg{
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index:-10;
+            /*left: 50%;*/
+        }
+        .slider{
+            position: absolute;    /*其实slider还要设一个z-index，因为把bg的z-index设小了，所以这里就不设了*/
+            width: 100%;
+            text-align: center;
+            top:400px;
+        }
+        .clearfix{
+        }
+        .clearfix li {
+            width: 120px;
+            list-style-type: none;
+            display: inline-block;
+            border: 2px solid #ffffff;
+            padding: 10px;
+            margin: 10px;
+
+        }
+
+        .clearfix li a{
+            text-decoration: none;
+            color: #ffffff;
+        }
+        .clearfix li:nth-of-type(1){
+            background-color: #009900;
+            position: relative;
+        }
+        .clearfix li:nth-of-type(1) ::before{
+            content:"";
+            display: block;            /*一定要有这句和上边这句，转换成块级元素*/
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            position: absolute;
+            top: -130px;
+            left:50%;
+            margin-left: -55px;
+            background-color: #1A1717;
+            opacity: 0.8;
+            z-index: 10;
+
+        }
+        .clearfix li:nth-of-type(1) ::after{
+            content:"";
+            display: block;            /*一定要有这句和上边这句，转换成块级元素*/
+            height: 100px;
+            width: 100px;
+            border: 5px solid #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: -135px;
+            background: url(http://www.w3cplus.com/demo/css3/CSS3Fullbackground/bg1.jpg) no-repeat center;
+            background-size:220px 135px;
+        }
+        .clearfix li:nth-of-type(1) :hover::before{
+            opacity: 0;
+        }
+        #bg1:target{      /*这里是#bg1.target或者slideLeft.target都行，这里前缀是跳转后那个的类或者id*/
+            z-index: -1;
+        }
+        .clearfix li:nth-of-type(2){
+            background-color: #6600FF;
+        }
+        .clearfix li:nth-of-type(3){
+            background-color: #e61061;
+        }
+        .clearfix li:nth-of-type(4){
+            background-color: #FF6600;
+        }
+        .clearfix li:nth-of-type(5){
+            background-color: #0088bb;
+        }
+    </style>
+</head>
+<body>
+<div class="slider">
+    <ul class="clearfix">
+        <li><a href="#bg1">Hipster Fashion Haircut </a></li>
+        <li><a href="#bg2">Cloud Computing Services &amp; Consulting</a></li>
+        <li><a href="#bg3">My haire is sooo fantastic!</a></li>
+        <li><a href="#bg4">Eat healthy &amp; excersice!</a></li>
+        <li><a href="#bg5">Lips so kissable I could die ...</a></li>
+    </ul>
+</div>
+<img src="http://www.w3cplus.com/demo/css3/CSS3Fullbackground/bg1.jpg" alt="" class="bg slideLeft" id="bg1" />
+<img src="http://www.w3cplus.com/demo/css3/CSS3Fullbackground/bg2.jpg" alt="" class="bg slideBottom" id="bg2" />
+<img src="http://www.w3cplus.com/demo/css3/CSS3Fullbackground/bg3.jpg" alt="" class="bg zoomIn" id="bg3" />
+<img src="http://www.w3cplus.com/demo/css3/CSS3Fullbackground/bg4.jpg" alt="" class="bg zoomOut" id="bg4" />
+<img src="http://www.w3cplus.com/demo/css3/CSS3Fullbackground/bg5.jpg" alt="" class="bg rotate" id="bg5" />
+</body>
+</html>

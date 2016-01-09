@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--模块化是为了避免全局函数及变量来污染全局-->
+
+
+<div ng-app="myApp" ng-controller="myCtrl">
+    {{firstName+""+lastName}}
+</div>
+
+<script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular.min.js"></script>
+<script src="myApp.js"></script>
+<script src="myCtrl.js"></script>
+
+<!--myApp.js内容
+
+var app=angular.module("myCtrl",[])
+
+-->
+
+<!--myCtrl.js内容
+
+app.controller("myCtrl",function($scope){
+    $scope.firstName="john";
+    $scope.lastName="Doe"
+})
+
+-->
+
+</body>
+</html>

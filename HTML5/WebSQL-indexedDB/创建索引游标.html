@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    myDB={
+        name:'test',
+        version:11,
+        db:null
+    }
+    function openDB(name,version){
+        var version = version||1;
+        var request = window.indexedDB.open(name,version);
+        request.onerror = function(e){
+            console.log(e.currentTarget.error.message)
+        }
+        request.onsuccess = function(e){
+            myDBm.db= e.target.result;
+        }
+        request.onupgradeneeded = function(e){
+            var db = e.target.result;
+            if(!db.objectStoreNames.contains('students')){
+                var store = db.createObjectStore('students',{keyPath:'id'});
+                //创建索引
+                store.createIndex('nameIndex','name',{unique:true});
+                store.createIndex('ageIndex','age',{unique:false});
+            }
+            console.log('DB version change to'+version)
+        }
+    }
+
+    //利用索引获取数据
+    function getDataByIndex(db,storeName){
+        var transaction = db.transaction(storeName);  //打开
+        var store = transaction.objectStore(storeName); //获取
+        var index =store.index("nameIndex");   //打开nameIndex这个索引表
+        index.get('Byron').onsuccess = function(e){
+            var student = e.target.result;
+            console.log(student.id);
+        }
+    }
+
+    //游标--
+    function fetchStoreByCursor(db,storeName){
+        var transaction = db.transaction(storeName);
+        var store = transaction.objectStore(storeName);
+        var request = store.openCursor();  //打开游标
+        request.onsuccess = function(e){
+            var cursor = e.target.result;
+            if(cursor){
+                console.log(cursor.key);
+                var currentStudent = cursor.value;
+                console.log(currentStudent.name);
+                cursor.continue();     //游标下移查询
+            }
+        }
+    }
+
+    //游标和Index结合
+    function getMultipleData(db,storeName){
+        var transaction = db.transaction(storeName); //打开表
+        var store = transaction.objectStore(storeName);  //获取表
+        var index = store.index("ageIndex");  //获取索引表
+        var request = store.openCursor(IDBKeyRange.only(26));   //打开索引表内的只有26岁的游标
+        request.onsuccess = function(e){    //请求成功执行
+            var cursor = e.target.result;     //定义取出的26岁和所有人的合集为cursor
+            if(cursor){
+                var student = cursor.value;    //取出游标所对应的值
+                console.log(student.name);
+                cursor.continue();
+            }
+
+        }
+    }
+
+    //游标范围
+
+
+    openDB(myDB.name,myDB.version);
+</script>
+
+
+</body>
+</html>

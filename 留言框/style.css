@@ -1,0 +1,41 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.main{
+    width: 450px;
+    height: 400px;
+    border: 3px solid #cccccc;
+    margin: 20px;
+}
+.contentList{
+    width: 400px;
+    height: 200px;
+    border: 1px solid #cccccc;
+    margin: 24px;
+    overflow-y: scroll;     /*这句是说留言内容太多，发出去后内容超出框后，出现滚动条*/
+    word-wrap: break-word;     /*是自动换行的意思*/
+}
+.sendCon{
+    width: inherit;
+    height: 125px;
+}
+.putCon{
+    float: left;
+    margin-left: 23px;
+}
+#name,#sendBtn{
+    width: 150px;
+    height: 30px;
+    margin-left: 6px;
+    margin-top: 15px;
+    display: block;
+}
+#nameSpan,#tip,#txtSpan{
+    color: brown;
+    font-size: 15px;
+}
+.nameBtn{
+    display: inline-block;
+    clear: both;     /*这是清除上边的浮动*/
+}

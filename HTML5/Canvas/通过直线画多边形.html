@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #canvas{
+            border:1px solid #aaa;
+            margin:50px auto;
+            display:block;
+
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="1024" height="500"></canvas>
+<!--    <script>
+        window.onload=function(){
+            var canvas=document.getElementById("canvas");
+            var context=canvas.getContext("2d");
+            canvas.width=1024;
+            canvas.height=500;
+            if(context){                        //判断context是否存在
+                //使用canvas绘图
+            }
+            else{
+                alert("当前浏览器不支持canvas")
+            }
+
+
+        }
+    </script>-->
+    <script>
+        //画和多线直线
+        window.onload=function(){
+            var canvas=document.getElementById("canvas");
+            var context=canvas.getContext("2d");
+            canvas.width=1024;
+            canvas.height=500;
+
+            context.beginPath();    //用来包围不同的图形
+            context.moveTo(100,100);
+            context.lineTo(700,700);
+            context.lineTo(100,700);   //当只有三个点的时候，会从上到下依次连接起来
+            context.lineTo(100,100);   //又设置回去的话，那就是一个三角形了
+            context.closePath();   //用来包围不同的图形
+
+            context.fillStyle="rgb(2,100,30)";  //这个是给多边形着色
+            context.strokeStyle="red";
+            context.fill();
+            context.stroke();
+
+            context.beginPath();    //用来包围不同的图形
+            context.moveTo(200,100);
+            context.lineTo(700,600);
+            context.closePath();   //用来包围不同的图形
+            context.lineWidth = 15;   //因为是看状态的，所以这个要在stroke（）之前定义
+            context.strokeStyle="black";
+            context.stroke();
+
+
+        }
+    </script>
+</body>
+</html>

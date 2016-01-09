@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<canvas id="canvas" width="800" height="800" style="border:1px solid #aaa;display:block;margin:50px auto;"></canvas>
+<script>
+    window.onload = function() {
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+        canvas.width = context.canvas.width;
+        canvas.height = context.canvas.height;
+
+        var grd= context.createLinearGradient(0,0,0,canvas.height);
+        grd.addColorStop(0.0,"#000");           //设置起始颜色
+        grd.addColorStop(1.0,"#035");         //设置结束颜色
+        context.fillStyle=grd;
+
+        context.fillRect(0, 0, context.canvas.width, context.canvas.height);
+
+
+        for (i = 0; i < 200; i++) {
+            var R = Math.random() * 20;
+            var x = Math.random() * canvas.width;
+            var y = Math.random() * canvas.height*0.65;
+            var rot = Math.random() * 72;
+            drawStar(context,R, x, y, rot);
+        }
+        function drawStar(cxt,R,x,y,rot){
+            cxt.save();
+
+            cxt.translate(x,y);
+            cxt.scale(R,R);
+            cxt.rotate(rot/180*Math.PI);
+
+            //这里可以进行图形变换，之后再进行绘制
+            starPath(cxt);
+
+            //这里可以进行图形变换，之后再进行绘制
+            cxt.fillStyle = "#FFFF00";
+            cxt.fill();
+            //都画完了，再进行关闭路径
+            cxt.restore();
+
+        }
+
+        //绘制一个标准五角星(然后通过缩放，旋转，位移，来增加图形)
+        function starPath(cxt) {   //最后一个是旋转
+            cxt.beginPath();
+            for (var i = 0; i < 5; i++) {
+                cxt.lineTo(Math.cos((18 + i * 72) * Math.PI / 180) ,     //300是半径，cos内是弧度数，弧度数=圆心角*Math.PI/180
+                        -Math.sin((18 + i * 72) * Math.PI / 180)
+                )
+                cxt.lineTo(Math.cos((54 + i * 72) * Math.PI / 180) *0.5,     //300是半径，cos内是弧度数，弧度数=圆心角*Math.PI/180
+                        -Math.sin((54 + i * 72) * Math.PI / 180) * 0.5
+                )
+            }
+            cxt.closePath();
+
+        }
+
+        /*//绘制一个五角星
+        function drawStar(cxt, r, R, x, y, rot) {   //最后一个是旋转
+            cxt.beginPath();
+            for (var i = 0; i < 5; i++) {
+                cxt.lineTo(Math.cos((18 + i * 72 - rot) * Math.PI / 180) * R + x,     //300是半径，cos内是弧度数，弧度数=圆心角*Math.PI/180
+                        -Math.sin((18 + i * 72 - rot) * Math.PI / 180) * R + y
+                )
+                cxt.lineTo(Math.cos((54 + i * 72 - rot) * Math.PI / 180) * r + x,     //300是半径，cos内是弧度数，弧度数=圆心角*Math.PI/180
+                        -Math.sin((54 + i * 72 - rot) * Math.PI / 180) * r + y
+                )
+            }
+            cxt.closePath();
+            context.fillStyle = "#FFFF00"
+            context.fill();
+        }*/
+    }
+</script>
+</body>
+</html>

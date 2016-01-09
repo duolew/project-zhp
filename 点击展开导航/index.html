@@ -1,0 +1,88 @@
+<!--
+总结：
+1.记得除了id以后都是数组，要不然下边取不到值
+2.记得ul后边一定要是中括号【】，不是小括号
+-->
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    body,ul,li{
+        margin: 0;
+        padding: 0;
+        font: 12px arial,Microsoft YaHei;
+        text-align: center;
+    }
+    ul{
+        list-style-type: none;
+        border-top: 1px solid red;
+        width: 80px;
+        padding: 20px 0px;
+    }
+    span{
+        color: red;
+        text-decoration: none;
+        border-top: 1px solid red;
+        padding: 20px 0px;
+        display: block;
+        width: 80px;
+    }
+    .content{
+        border:1px solid red;
+        width:80px;
+        border-top:none;
+        margin: 50px auto;
+        padding: 0;
+    }
+    .hide{
+        display: none;
+    }
+</style>
+<script>
+    window.onload=function(){
+        var content=document.getElementsByClassName("content")[0];   //记得除了id以后都是数组，要不然下边取不到值
+        var span=content.getElementsByTagName("span");
+        var ul=content.getElementsByTagName("ul");
+        console.log(span);
+            for(i=0;i<span.length;i++){
+                span[i].index=i;
+                span[i].onclick=function(){
+                if(ul[this.index].className!="hide"){      //记得ul后边一定要是中括号【】，不是小括号
+                    ul[this.index].className="hide"
+                }else{
+                    ul[this.index].className=""
+                }
+
+            }
+        }
+
+    }
+
+</script>
+<body>
+<div class="content">
+    <span>Web前端</span>
+    <ul class="hide">
+        <li>JavaScript</li>
+        <li>DIV+CSS</li>
+        <li>jQuery</li>
+    </ul>
+    <span>后台脚本</span>
+    <ul class="hide">
+        <li>PHP</li>
+        <li>ASP.net</li>
+        <li>JSP</li>
+    </ul>
+    <span>前端框架</span>
+    <ul class="hide">
+        <li>Extjs</li>
+        <li>Esspress</li>
+        <li>YUI</li>
+    </ul>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    function openDB (name) {
+        var request=window.indexedDB.open(name);
+        request.onerror=function(e){
+            console.log('OPen Error!');
+        };
+        request.onsuccess=function(e){
+            myDB.db=e.target.result;
+        };
+    }
+
+    var myDB={
+        name:'test',
+        version:1,
+        db:null
+    };
+    openDB(myDB.name);
+</script>
+
+<script>
+
+    //创建或打开indexedDB
+    function openDB(name,version){
+        var version_now = version||1;
+        var request=window.indexedDB.open(name,version_now);
+        request.onerror=function(e){
+            console.log(e.currentTarget.error.message)
+        };
+        request.onsuccess=function(e){
+            myDB.db= e.target.result;
+        };
+        request.onupgradeneeded=function(e){           //当前版本库和之前版本库不一致的时候，则出发onupgradeneeded
+            console.log("版本已经被更改为"+version)
+        };
+    }
+
+    var myDB={
+        name:'text',
+        version:3,
+        db:null
+    };
+    openDB(myDB.name,myDB.version);
+
+
+
+</script>
+
+<script>
+
+    /*关闭或者删除数据库，直接调用close（）*/
+
+    /*关闭*/
+    function closeDB(db){
+        db.close();
+    }
+
+    /*删除*/
+    function deleteDB(name){
+        indexedDB.deleteDatabase(name);
+    }
+
+    var myDB={
+        name:'test',
+        version:3,
+        db:null
+    }
+    openDB(myDB.name,myDB.version);
+    setTimeout(function(){
+        closeDB(myDB.db);
+        deleteDB(myDB.name);
+    },500)
+
+</script>
+
+<script>
+    /*
+
+    object store相当于表
+    事务三种模式，只读read，读写readwrite，版本变更verionchange
+
+    */
+
+    //var transaction=db.transaction(['students','teacher'])//打开一个事务，使用student和teacher表
+    //var objectStore=transaction.objectStore('students'); //获取students的表
+
+</script>
+
+
+
+
+</body>
+</html>

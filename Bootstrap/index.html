@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="x-ua-compatible" content="IE-edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0 maximun-scale=1.0" />
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="main.css"/>
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <title>Bootstrap</title>
+</head>
+<body>
+    <div class="container">
+
+        <!--栅格化,不同分辨率可以同时定义-->
+        <div class="row">
+            <div class="col-xs-3 col-md-2 lead">今天</div>
+            <div class="col-xs-3 col-md-2">哈哈</div>
+            <div class="col-xs-6 col-md-8"></div>
+        </div>
+
+
+        <!--无序列表去样式-->
+        <ol class="list-unstyled">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ol>
+        <!--横向排列-->
+        <ul class="list-inline">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+
+
+        <!--下边是让标题和内容横向排列，通过dl-horizontal-->
+        <dl class="dl-horizontal">
+            <dt>这里是标题</dt>
+            <dd>这里是内容</dd>
+        </dl>
+
+        <!--模拟键盘-->
+        <kbd>模拟键盘</kbd>
+
+
+
+        <!--code标记记得要用特殊符号-->
+        <code>&lt section &gt</code>
+
+
+        <!--表格-->
+        <table class="table table-striped table-bordered table-hover table-condensed">
+            <thead>            <!--头部表格,以后不要用这个了bootstrap不支持-->
+            <tr class="active">
+                <th>1</th>     <!--表格标题-->
+                <th>2</th>
+                <th>3</th>
+            </tr>
+            </thead>
+            <tbody>            <!--中部表格-->
+            <tr class="success">
+                <td>1</td>     <!--表格内容-->
+                <td>2</td>
+                <td>3</td>
+            </tr>
+            <tr class="info">
+                <td>1</td>     <!--表格内容-->
+                <td>2</td>
+                <td>3</td>
+            </tr>
+            <tr class="warning">
+                <td>1</td>     <!--表格内容-->
+                <td>2</td>
+                <td>3</td>
+            </tr>
+            </tbody>
+            <tfoot>              <!--底部表格，以后不要用这个了bootstrap不支持-->
+            <tr class="danger">
+                <td>1</td>       <!--表格内容-->
+                <td>2</td>
+                <td>3</td>
+            </tr>
+            </tfoot>
+        </table>
+
+
+
+        <!--表单-->
+        <form action="">
+            <div class="form-group">      <!--将表单包裹在form-group内-->
+                <label for="hehe1" class="sr-only">EMAIL:</label>  <!--sr-only是隐藏label用的-->
+                    <input type="email" id="hehe1" class="form-control" placeholder="请输入邮箱"/>
+
+            </div>
+            <div>
+                <label for="hehe2">PASSWORD:</label>
+                    <input type="password" id="hehe2" class="form-control" placeholder="请输入密码"/>
+
+            </div>
+            <div class="form-group">
+                <label for="hehe4"></label>
+                <input type="file" id="hehe4"/>
+            </div>
+            <div class="form-group">
+                <label for="hehe5"></label>
+                <input type="checkbox" id="hehe5" checked/>
+            </div>
+            <div class="form-group">
+                <button id="hehe3" class="btn btn-default">按钮</button>
+            </div>
+        </form>
+
+        <!--下边主要是让内联元素横向排列-->
+        <form action="#" class="form-inline">   <!--form-inline使内联元素横向排列-->
+            <div class="form-group">
+                <label for="haha1" >EMAIL:</label>
+                <input type="email" id="haha1" class="form-control" placeholder="email"/>
+            </div>
+            <div class="form-group">
+                <label for="haha2">PASSWORD:</label>
+                <input type="password" id="haha2" class="form-control" placeholder="password"/>
+            </div>
+        </form>
+
+
+        <!--下边是仅让label和input元素来横向排列-->
+        <form class="form-horizontal">   <!--form-horizontal仅让label和input元素来横向排列-->
+            <div class="form-group">
+                <label for="haha3" class="control-label">EMAIL:</label>
+                <input type="datetime-local" id="haha3" class="form-control" placeholder="email"/>
+            </div>
+            <div class="form-group">
+                <label for="haha4" >PASSWORD:</label>
+                <input type="password" id="haha4" class="form-control" placeholder="password"/>
+            </div>
+        </form>
+
+<!--横向多选和单选-->
+        <label for="haha5" class="checkbox-inline">   <!--不加class="checkbox-inline"也是横排-->
+            <input type="checkbox" id="haha5"/>1
+        </label>
+        <label for="haha6">
+            <input type="checkbox" id="haha6"/>2
+        </label>
+        <label for="haha7">
+            <input type="checkbox" id="haha7"/>3
+        </label>
+        <label for="haha8" class="checkbox-inline">   <!--不加class="checkbox-inline"也是横排-->
+            <input type="radio" id="haha8"/>1
+        </label>
+        <label for="haha9">
+            <input type="radio" id="haha9"/>2
+        </label>
+        <label for="haha10">
+            <input type="radio" id="haha10"/>3
+        </label>
+
+
+        <!--下拉列表-->
+        <select name="" id="" class="form-control" multiple>  <!--multiple默认多选项-->
+            <option value="">1</option>
+            <option value="">2</option>
+            <option value="">3</option>
+            <option value="">3</option>
+            <option value="">3</option>
+            <option value="">3</option>
+        </select>
+
+
+        <!--校验状态-->
+        <form action="" class="has-success">  <!--has-success来控制颜色状态，还有has-warning,has-error,下边元素一定要标有control-label,form-control,help-block的时候才管用-->
+            <label for="" class="control-label">hehe</label>
+            <input type="text" class="form-control"/>hoho
+        </form>
+
+
+        <!--给输入框添加图标-->
+        <div class="has-feedback form-group has-success">   <!--必须要有has-feedback才可以显示下边图标-->
+            <label for="" class="control-label sr-only">111</label>     <!--这个里边必须有内容，要不然下边图标会不居中，如果这里不像显示的话，可以通过sr-only来隐藏这个label-->
+            <input type="text" class="form-control"/>
+            <span class="glyphicon glyphicon-ok form-control-feedback"></span>  <!--图标必须加在span里才行,而且必须有form-control-feedback-->
+        </div>
+
+
+        <!--表单变成一行显示-->
+        <form class="form-inline">           <!-- form-inline让下边元素都变成一行，且宽度不是100%-->
+        <div class="form-group has-success has-feedback">
+                <label class="control-label" for="inputGroupSuccess3">Input group with success</label>
+                <div class="input-group">
+                    <span class="input-group-addon">@</span>
+                    <input type="text" class="form-control" id="inputGroupSuccess3" aria-describedby="inputGroupSuccess3Status">
+                </div>
+                <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                <span id="inputGroupSuccess3Status" class="sr-only">(success)</span>
+            </div>
+        </form>
+
+        <!--这个是直接input的控制表单高度的设置，用input-lg和input-sm-->
+        <input type="text" class="form-control input-lg"/>
+        <input type="text" class="form-control"/>
+        <input type="text" class="form-control input-sm"/>
+
+        <!--下边这个是通过form-group-lg来控制表单高度的，其实也可以用input-lg来控制高度-->
+        <form class="form-horizontal">
+            <div class="form-group form-group-lg">
+                <label class="col-sm-2 control-label" for="formGroupInputLarge">Large label</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" id="formGroupInputLarge" placeholder="Large input">
+                </div>
+            </div>
+            <div class="form-group form-group-sm">
+                <label class="col-sm-2 control-label" for="formGroupInputSmall">Small label</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" id="formGroupInputSmall" placeholder="Small input">
+                </div>
+            </div>
+        </form>
+
+<!--下边是按钮,按钮一般用-->
+<button type="button" class="btn btn-default">按钮</button>
+<button type="button" class="btn btn-primary">按钮</button>
+<button type="button" class="btn btn-success">按钮</button>
+<button type="button" class="btn btn-info">按钮</button>
+<button type="button" class="btn btn-warning">按钮</button>
+<button type="button" class="btn btn-warning">按钮</button>
+<button type="button" class="btn btn-danger">按钮</button>
+<button type="button" class="btn btn-link">按钮</button>
+
+<!--控制按钮大小btn-lg,btn-sm,btn-xs-->
+<button type="button" class="btn btn-default btn-lg"></button>
+<button type="button" class="btn btn-default "></button>
+<button type="button" class="btn btn-default btn-sm"></button>
+<button type="button" class="btn btn-default btn-xs"></button>
+
+     <!--将按钮拉伸到和父级元素一样大，btn-block   -->
+    <button type="button" class="btn btn-primary btn-lg btn-block">（块级元素）Block level button</button>
+
+    <!--按下状态是通过添加active来实现的-->
+        <button type="button" class="btn btn-primary btn-lg active">Primary button</button>
+        <a href="#" class="btn btn-primary btn-lg active" role="button">Primary link</a>
+
+    <!--禁用状态是通过disabled来控制的-->
+
+
+
+      <!--让图片支持响应式，加.img-responsive来实现  -->
+        <!--让上边这个图片居中，使用.center-block，不要用text-center-->
+        <img src="http://www.gbtags.com/gb/laitu/300x300" alt="" class="img-responsive"/>
+
+        <!--下边是图片形状,圆角，圆形，边框-->
+        <img src="http://www.gbtags.com/gb/laitu/100x100" alt="" class="img-rounded"/>
+        <img src="http://www.gbtags.com/gb/laitu/100x100" alt="" class="img-circle"/>
+        <img src="http://www.gbtags.com/gb/laitu/100x100" alt="" class="img-thumbnail"/>
+
+        <!--关闭按钮-->
+        <button type="button" class="close" ><span>&times;</span> </button>
+
+        <!--三角符号-->
+        <span class="caret"></span>
+
+        <!--快速浮动-->
+        <div class="pull-left"></div>
+        <div class="pull-right"></div>
+
+        <!--让内容块居中-->
+        <div class="center-block"></div>
+
+        <!--清除浮动-->
+        <div class="clearfix"></div>
+
+        <!--显示或隐藏内容-->
+        <div class="show"></div>
+        <div class="hidden"></div>
+
+        <!--图片替换，通过text-hide来替换图片-->
+        <h1 class="text-hide">custom heading</h1>
+        .heading{
+            .text-hide()
+        }
+
+<!--应用按钮工具条-->
+        <button type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-step-backward "></span>
+        </button>
+
+<!--下拉菜单-->
+        <div class="dropup">     <!--把这里改成dropdown就是剪头冲下，排列也向下展开了-->
+            <button type="button" class="btn  btn-default dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu ">    <!--这里添加dropdown-menu-right来让菜单右对齐,按钮不右对齐-->
+                <li class="dropdown-header">这里是标题</li>    <!--给菜单加一个标题-->
+                <li>1</li>
+                <li>2</li>
+                <li class="divider"></li>   <!--这是个横向分割线-->
+                <li>3</li>
+            </ul>
+        </div>
+
+<!--按钮组-->
+        <div class="btn-group">   <!--这个是按钮组标签-->
+            <button type="button" class="btn btn-default">1</button>
+            <button type="button" class="btn btn-default">2</button>
+            <button type="button" class="btn btn-default">3</button>
+        </div>
+
+
+        <div class="btn-toolbar">      <!-- 这个是按钮组工具栏，包围住多个按钮组-->
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default">1</button>
+                    <button type="button" class="btn btn-default">2</button>
+                    <button type="button" class="btn btn-default">3</button>
+                </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">1</button>
+                <button type="button" class="btn btn-default">2</button>
+                <button type="button" class="btn btn-default">3</button>
+            </div>
+        </div>
+
+
+
+  <!--按钮大小可以通过btn-group-lg或者btn-group-sm 或者btn-group-xs来控制按钮组大小-->
+
+        <div class="btn-group-vertical">    <!--这个是让按钮组竖向排列-->
+            <button type="button" class="btn btn-default">1</button>
+            <button type="button" class="btn btn-default">2</button>
+            <button type="button" class="btn btn-default">3</button>
+        </div>
+
+        <!--两边对齐的按钮组-->
+
+        <div class="btn-group btn-group-justified">    <!--这个是让按钮组左右对齐-->
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">1</button>
+            </div>     <!--里边是3个组，才能出现全屏占满-->
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">2</button>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">3</button>
+            </div>
+        </div>
+
+<!--导航-->
+
+    <ul class="nav nav-tabs">   <!--li内一定要加a标签才能显示正常-->
+        <li  class="active"><a href="#"> home</a></li>
+        <li ><a href="#"> home1</a></li>
+        <li ><a href="#"> home2</a></li>
+    </ul>
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="#">Home</a></li>
+            <li role="presentation"><a href="#">Profile</a></li>
+            <li role="presentation"><a href="#">Messages</a></li>
+        </ul>
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Brand</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                        <li><a href="#">Link</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Link</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+
+    </div>
+</body>
+</html>

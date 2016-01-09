@@ -1,0 +1,39 @@
+*{
+    margin: 0;
+    padding: 0;
+    font:12px "微软雅黑";
+}
+#tab{
+    width: 270px;
+    margin: auto;
+    padding: 50px;
+}
+#tab ul{
+    height: 30px;
+    display: block;
+    border-bottom:2px solid brown;
+}
+#tab ul li{
+    display: inline-block;           /*让块元素排成一行*/
+    list-style-type: none;          /*去除表单前边符号*/
+    line-height:28px;                 /*行间距*/
+    border:1px solid;
+    border-bottom: none;
+    margin-left: 5px;
+    padding:0 10px;
+    text-align: center;
+}
+.on {
+    border-top: 2px solid brown;
+    border-bottom: 2px solid #fff;
+}
+.txt{
+    width: 248px;
+    margin: auto;
+    display : block;
+    border: 1px solid;
+    border-top: none;
+    padding: 10px;
+}
+.hide{display: none;             /*隐藏元素*/
+}

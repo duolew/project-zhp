@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular.min.js"></script>
+    <title></title>
+</head>
+<body>
+
+<div ng-app="app" >
+    <span enter leave>加载</span>                       <!--A的写法-->
+    <hello></hello>
+</div>
+<script>
+    var app = angular.module("app",[]);
+
+    app.directive('enter',function(){
+        return {
+            restrict:'A',
+            link:function(scope,element,attrs){
+                console.log(scope);           //这里可以通过console.log查询element，scope，attrs等的属性
+                element.bind("mouseenter",function(){
+                    element.css("font-size","25px")
+                })
+            }
+
+
+        }
+    })
+    app.directive('leave',function(){
+        return {
+            restrict:'A',
+            link:function(scope,element,attrs){
+                element.bind("mouseleave",function(){
+                    element.css("font-size","12px")
+                })
+            }
+
+
+        }
+    })
+    app.directive('hello',function(){
+        return {
+            restrict:'E',
+            template:"<div><input ng-model='txt'</div><div>{{txt}}</div>",
+            link:function(scope,element){
+                scope.$watch('txt',function(newVal){    //变量为输入的值   watch为监听事件
+                    if(newVal==='error'){
+                        element.css("color","red")
+                    }
+                })
+            }
+
+
+        }
+    })
+</script>
+
+
+
+</body>
+</html>

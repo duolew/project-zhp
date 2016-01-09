@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <!--下边是按极客学院做的
+<script>
+
+    //    clickcount和hits是一样的
+    localStorage.clear();//清除localStorage;
+    if(localStorage.hits){
+        localStorage.hits=Number(localStorage.hits)+1;
+    }else{
+        localStorage.hits=1;
+    }
+
+    document.write(localStorage.hits);
+</script>
+-->
+
+
+<!--localStorage 对象存储的数据没有时间限制。第二天、第二周或下一年之后，数据依然可用。-->
+    <script>
+        function clickCounter()
+        {
+            if(typeof(Storage)!=="undefined")
+            {
+                if (localStorage.clickcount)
+                {
+                    localStorage.clickcount=Number(localStorage.clickcount)+1;
+                }
+                else
+                {
+                    localStorage.clickcount=1;
+                }
+                document.getElementById("result").innerHTML="You have clicked the button " + localStorage.clickcount + " time(s).";
+            }
+            else
+            {
+                document.getElementById("result").innerHTML="Sorry, your browser does not support web storage...";
+            }
+        }
+    </script>
+</head>
+<body>
+
+<p><button onclick="clickCounter()" type="button">Click me!</button></p>
+<div id="result"></div>
+
+
+</body>
+</html>

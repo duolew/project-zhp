@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <!--
+    缺点：1.没有过期时间！但是可以自己来进行封装，来实现过期时间控制
+         2.不能跨域！但是可以通过html5的postmessage来实现通信
+
+    localstorage的API有
+    getItem    取
+    setItem    设置
+    removeItem  移除
+    key
+    clear       删除key
+------------------------------------
+    localstorage.setItem(key,value)
+    localstorage.getItem(key)获取数据
+    localstorage.valueOf()获取所有数据
+    localstorage.removeItem(key)删除数据
+    localstorage.clear()清空所有数据
+    localstorage.length获取本地存储数量
+    localstorage.key(N)获取第N个key键值
+
+    -->
+
+<script>
+    var src="1.jpg";
+    function set(key) {
+        //创建一个img标签
+        var img = document.createElement('img');
+        //当img被加载的时候触发事件
+        img.addEventListener("load", function () {
+            var imgCanvas = document.createElement("canvas");
+            var imgContext = imgCanvas.getContext("2d");
+            imgCanvas.width = this.width;
+            imgCanvas.height = this.height;
+
+            //渲染图片到Canvas
+            imgContext.drawImage(this, 0, 0, this.width, this.height);
+            //用data urlde形式取出,这样取出的数据就是字符串了
+            var imgAsDataURL = imgCanvas.toDataURL("image/png");
+
+            //保存到本地存储当中去
+            try {
+                localStorage.setItem(key, imgAsDataURL);
+            }
+            catch (e) {
+                console.log("storage failed:" + e);
+            }
+
+        },false);
+        img.src=src;
+    }
+    function get(key){ //从本地缓存获取图片并渲染
+        var srcStr=localStorage.getItem(key);
+        var imgObj=document.createElement('img');
+        imgObj.src=srcStr;
+        document.body.appendChild(imgObj);
+
+    }
+
+</script>
+
+<!--下边做一个过期控制-->
+
+    <script>
+        function set(key, v){
+            var curTime = new Date().getTime();
+            localStorage.setItem(key,JSON.stringify({data:v,time:curTime}));    //JSON.stringify将json对象转换成字符串
+        }
+        function get(key,exp){
+            var data =localStorage.getItem(key);
+            var dataObj=JSON.parse(data);                            //JSON.parse将字符串转转换成json对象
+            if(new Date().getTime()-dataObj.time>exp){
+                console.log('expires');
+            }
+            else{
+                console.log("data="+dataObj.data);
+            }
+        }
+
+    </script>
+
+</body>
+</html>
