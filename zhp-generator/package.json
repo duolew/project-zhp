@@ -1,0 +1,68 @@
+{
+  "_args": [
+    [
+      "zhp-generator",
+      ""
+    ]
+  ],
+  "_from": "zhp-generator@*",
+  "_id": "zhp-generator@1.0.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/zhp-generator",
+  "_nodeVersion": "5.4.0",
+  "_npmUser": {
+    "email": "445138773@qq.com",
+    "name": "duolew"
+  },
+  "_npmVersion": "3.3.12",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "zhp-generator",
+    "raw": "zhp-generator",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "*",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_shasum": "99c6edbfd79ec142443421bc6fa42b450a2225e3",
+  "_shrinkwrap": null,
+  "_spec": "zhp-generator",
+  "_where": "",
+  "author": {
+    "name": "张鹏"
+  },
+  "bin": {
+    "zhp-app": "./bin/autogo.js"
+  },
+  "dependencies": {
+    "bluebird": "^3.1.1",
+    "commander": "^2.9.0",
+    "fs-extra": "^0.26.4"
+  },
+  "description": "zhangpeng' webapp generator",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "99c6edbfd79ec142443421bc6fa42b450a2225e3",
+    "tarball": "http://registry.npmjs.org/zhp-generator/-/zhp-generator-1.0.0.tgz"
+  },
+  "license": "ISC",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "duolew",
+      "email": "445138773@qq.com"
+    }
+  ],
+  "name": "zhp-generator",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.4"
+}

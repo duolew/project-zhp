@@ -34,24 +34,7 @@
     <favorites_list name="project-zhp" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
-        <entry file="file://D:/3/zhp-generator/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
-            <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.46921444">
-                <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-          <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-            <state />
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -766,7 +749,7 @@
       <workItem from="1452261580589" duration="14145000" />
       <workItem from="1452303338754" duration="34232000" />
       <workItem from="1452413621100" duration="892000" />
-      <workItem from="1452415713153" duration="806000" />
+      <workItem from="1452415713153" duration="926000" />
     </task>
     <task id="LOCAL-00001" summary="完成h5页面">
       <created>1447495148369</created>
@@ -778,7 +761,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="383584000" />
+    <option name="totallyTimeSpent" value="383704000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -790,7 +773,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="147" y="56" width="1021" height="666" extended-state="0" />
+    <frame x="147" y="56" width="1021" height="666" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
